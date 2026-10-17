@@ -1,0 +1,12 @@
+/* Giai đoạn 1: reset nền tảng, chưa triển khai giao diện. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Giai đoạn 2: kiểu chữ và màu sắc. */
+/* Giai đoạn 2: bố cục và lưới giao diện. */
+/* Giai đoạn 2: thành phần biểu mẫu và bảng. */
+/* Giai đoạn 2: responsive và trạng thái tương tác. */

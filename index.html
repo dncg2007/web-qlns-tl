@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tổng quan | HRM &amp; Payroll</title>
+    <meta name="description" content="Dashboard tổng quan về nhân sự, quỹ lương và hợp đồng sắp hết hạn của doanh nghiệp.">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/data.js" defer></script>
+    <script src="js/logic.js" defer></script>
+    <script src="js/features.js" defer></script>
+  </head>
+  <body>
+    <!-- Khối đầu trang: nhận diện hệ thống và thao tác dùng chung. -->
+    <header>
+      <a href="index.html">HRM &amp; Payroll</a>
+      <!-- Form tìm kiếm dùng chung cho các màn hình; hành vi sẽ bổ sung ở giai đoạn sau. -->
+      <form role="search" action="#" method="get">
+        <label for="global-search">Tìm kiếm nhanh</label>
+        <input id="global-search" name="q" type="search" placeholder="Tìm nhân viên hoặc phòng ban">
+        <button type="submit">Tìm</button>
+      </form>
+      <button type="button">Dark Mode</button>
+    </header>
+
+    <!-- Điều hướng chính: liên kết qua lại giữa ba màn hình nghiệp vụ. -->
+    <nav aria-label="Điều hướng chính">
+      <ul>
+        <li><a href="index.html" aria-current="page">Tổng quan</a></li>
+        <li><a href="nhan-vien.html">Nhân viên</a></li>
+        <li><a href="bang-luong.html">Bảng lương</a></li>
+      </ul>
+    </nav>
+
+    <!-- Nội dung chính của trang dashboard. -->
+    <main>
+      <h1>Tổng quan</h1>
+
+      <!-- Khu vực KPI: tóm tắt các chỉ số quản trị quan trọng. -->
+      <section aria-labelledby="kpi-heading">
+        <h2 id="kpi-heading">Chỉ số chính</h2>
+        <article>
+          <h3>Tổng nhân viên</h3>
+          <p>128</p>
+          <p>Đang làm việc</p>
+        </article>
+        <article>
+          <h3>Quỹ lương tháng</h3>
+          <p>1.280.000.000 VNĐ</p>
+          <p>Tháng 06/2025</p>
+        </article>
+        <article>
+          <h3>Ngày công trung bình</h3>
+          <p>25,4 ngày</p>
+          <p>Toàn doanh nghiệp</p>
+        </article>
+        <article>
+          <h3>Hợp đồng sắp hết hạn</h3>
+          <p>7</p>
+          <p>Trong 30 ngày tới</p>
+        </article>
+      </section>
+
+      <!-- Khu vực biểu đồ: trình bày quỹ lương theo phòng ban bằng dữ liệu tĩnh. -->
+      <section aria-labelledby="salary-chart-heading">
+        <h2 id="salary-chart-heading">Quỹ lương theo phòng ban</h2>
+        <article>
+          <figure>
+            <figcaption>Quỹ lương tháng 06/2025, đơn vị: triệu VNĐ</figcaption>
+            <ul>
+              <li>Khối Kỹ thuật: 420</li>
+              <li>Khối Kinh doanh: 360</li>
+              <li>Khối Nhân sự: 180</li>
+              <li>Khối Tài chính: 220</li>
+              <li>Khối Hành chính: 100</li>
+            </ul>
+          </figure>
+        </article>
+      </section>
+
+      <!-- Khu vực cảnh báo: liệt kê các hợp đồng cần được theo dõi. -->
+      <section aria-labelledby="expiring-contract-heading">
+        <h2 id="expiring-contract-heading">Hợp đồng sắp hết hạn</h2>
+        <article>
+          <ul>
+            <li>Nguyễn Minh Anh — <time datetime="2025-07-05">05/07/2025</time></li>
+            <li>Trần Quốc Bảo — <time datetime="2025-07-12">12/07/2025</time></li>
+            <li>Lê Thu Hà — <time datetime="2025-07-20">20/07/2025</time></li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- Lối tắt: dẫn đến các tác vụ thường dùng. -->
+      <aside aria-labelledby="shortcut-heading">
+        <h2 id="shortcut-heading">Lối tắt</h2>
+        <ul>
+          <li><a href="nhan-vien.html#employee-form">Thêm nhân viên</a></li>
+          <li><a href="nhan-vien.html#employee-list">Xem danh sách nhân viên</a></li>
+          <li><a href="bang-luong.html#salary-table">Xem bảng lương tháng</a></li>
+        </ul>
+      </aside>
+    </main>
+
+    <!-- Chân trang: thông tin liên hệ và bản quyền dự án. -->
+    <footer>
+      <p>© 2025 HRM &amp; Payroll — Giai đoạn 1: nền tảng và kiến trúc.</p>
+      <address>Email hỗ trợ: <a href="mailto:hrm@example.com">hrm@example.com</a></address>
+    </footer>
+  </body>
+</html>

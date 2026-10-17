@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nhân viên | HRM &amp; Payroll</title>
+    <meta name="description" content="Quản lý, tìm kiếm, lọc và cập nhật hồ sơ nhân viên trong hệ thống HRM &amp; Payroll.">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/data.js" defer></script>
+    <script src="js/logic.js" defer></script>
+    <script src="js/features.js" defer></script>
+  </head>
+  <body>
+    <!-- Khối đầu trang: nhận diện hệ thống và thao tác dùng chung. -->
+    <header>
+      <a href="index.html">HRM &amp; Payroll</a>
+      <!-- Form tìm kiếm dùng chung cho các màn hình; hành vi sẽ bổ sung ở giai đoạn sau. -->
+      <form role="search" action="#" method="get">
+        <label for="global-search">Tìm kiếm nhanh</label>
+        <input id="global-search" name="q" type="search" placeholder="Tìm nhân viên hoặc phòng ban">
+        <button type="submit">Tìm</button>
+      </form>
+      <button type="button">Dark Mode</button>
+    </header>
+
+    <!-- Điều hướng chính: đánh dấu trang hiện tại bằng aria-current. -->
+    <nav aria-label="Điều hướng chính">
+      <ul>
+        <li><a href="index.html">Tổng quan</a></li>
+        <li><a href="nhan-vien.html" aria-current="page">Nhân viên</a></li>
+        <li><a href="bang-luong.html">Bảng lương</a></li>
+      </ul>
+    </nav>
+
+    <!-- Nội dung chính của trang quản lý nhân viên. -->
+    <main>
+      <h1>Quản lý nhân viên</h1>
+
+      <!-- Bộ lọc: chuẩn bị các tiêu chí tìm kiếm và lọc nhân viên. -->
+      <section aria-labelledby="employee-search-heading">
+        <h2 id="employee-search-heading">Tìm kiếm và lọc nhân viên</h2>
+        <form action="#employee-list" method="get">
+          <label for="employee-search">Từ khóa</label>
+          <input id="employee-search" name="employee-search" type="search" placeholder="Tên hoặc mã nhân viên">
+
+          <label for="department-filter">Phòng ban</label>
+          <select id="department-filter" name="department">
+            <option value="">Tất cả phòng ban</option>
+            <option value="ky-thuat">Kỹ thuật</option>
+            <option value="kinh-doanh">Kinh doanh</option>
+            <option value="nhan-su">Nhân sự</option>
+            <option value="tai-chinh">Tài chính</option>
+          </select>
+
+          <fieldset>
+            <legend>Trạng thái làm việc</legend>
+            <label for="status-all"><input id="status-all" name="status" type="radio" value="all" checked> Tất cả</label>
+            <label for="status-active"><input id="status-active" name="status" type="radio" value="active"> Đang làm việc</label>
+            <label for="status-inactive"><input id="status-inactive" name="status" type="radio" value="inactive"> Đã nghỉ</label>
+          </fieldset>
+          <button type="submit">Lọc danh sách</button>
+          <a href="#employee-form">Thêm nhân viên</a>
+        </form>
+      </section>
+
+      <!-- Danh sách: div chỉ dùng để bọc bảng, cho phép bổ sung cuộn ngang ở giao diện responsive. -->
+      <section id="employee-list" aria-labelledby="employee-list-heading">
+        <h2 id="employee-list-heading">Danh sách nhân viên</h2>
+        <div>
+          <table>
+            <caption>Danh sách nhân viên mẫu đang làm việc</caption>
+            <thead>
+              <tr>
+                <th scope="col">Mã NV</th>
+                <th scope="col">Họ và tên</th>
+                <th scope="col">Phòng ban</th>
+                <th scope="col">Chức vụ</th>
+                <th scope="col">Ngày vào làm</th>
+                <th scope="col">Trạng thái</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>NV001</td>
+                <td>Nguyễn Minh Anh</td>
+                <td>Kỹ thuật</td>
+                <td>Lập trình viên</td>
+                <td>2022-08-15</td>
+                <td>Đang làm việc</td>
+              </tr>
+              <tr>
+                <td>NV002</td>
+                <td>Trần Quốc Bảo</td>
+                <td>Kinh doanh</td>
+                <td>Chuyên viên kinh doanh</td>
+                <td>2021-03-01</td>
+                <td>Đang làm việc</td>
+              </tr>
+              <tr>
+                <td>NV003</td>
+                <td>Lê Thu Hà</td>
+                <td>Nhân sự</td>
+                <td>Chuyên viên nhân sự</td>
+                <td>2023-01-10</td>
+                <td>Đang làm việc</td>
+              </tr>
+              <tr>
+                <td>NV004</td>
+                <td>Phạm Gia Huy</td>
+                <td>Tài chính</td>
+                <td>Kế toán viên</td>
+                <td>2020-11-20</td>
+                <td>Đang làm việc</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Biểu mẫu hồ sơ: chia thành bốn fieldset để nhóm thông tin theo trách nhiệm dữ liệu. -->
+      <section id="employee-form" aria-labelledby="employee-form-heading">
+        <h2 id="employee-form-heading">Thêm hoặc sửa hồ sơ nhân viên</h2>
+        <form action="#employee-list" method="post">
+          <fieldset>
+            <legend>Thông tin định danh</legend>
+            <label for="employee-id">Mã nhân viên</label>
+            <input id="employee-id" name="employee-id" type="text" required>
+            <label for="full-name">Họ và tên</label>
+            <input id="full-name" name="full-name" type="text" required>
+            <label for="birth-date">Ngày sinh</label>
+            <input id="birth-date" name="birth-date" type="date">
+            <p>Giới tính</p>
+            <label for="gender-male"><input id="gender-male" name="gender" type="radio" value="male"> Nam</label>
+            <label for="gender-female"><input id="gender-female" name="gender" type="radio" value="female"> Nữ</label>
+            <label for="gender-other"><input id="gender-other" name="gender" type="radio" value="other"> Khác</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Thông tin liên hệ</legend>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required>
+            <label for="phone">Số điện thoại</label>
+            <input id="phone" name="phone" type="tel">
+            <label for="address">Địa chỉ</label>
+            <textarea id="address" name="address" rows="3"></textarea>
+          </fieldset>
+
+          <fieldset>
+            <legend>Thông tin công việc</legend>
+            <label for="join-date">Ngày vào làm</label>
+            <input id="join-date" name="join-date" type="date" required>
+            <label for="employee-department">Phòng ban</label>
+            <select id="employee-department" name="employee-department" required>
+              <option value="">Chọn phòng ban</option>
+              <option value="ky-thuat">Kỹ thuật</option>
+              <option value="kinh-doanh">Kinh doanh</option>
+              <option value="nhan-su">Nhân sự</option>
+              <option value="tai-chinh">Tài chính</option>
+            </select>
+            <label for="position">Chức vụ</label>
+            <input id="position" name="position" type="text">
+          </fieldset>
+
+          <fieldset>
+            <legend>Chế độ và ghi chú</legend>
+            <p>Phụ cấp áp dụng</p>
+            <label for="allowance-lunch"><input id="allowance-lunch" name="allowance" type="checkbox" value="lunch"> Ăn trưa</label>
+            <label for="allowance-travel"><input id="allowance-travel" name="allowance" type="checkbox" value="travel"> Đi lại</label>
+            <label for="allowance-phone"><input id="allowance-phone" name="allowance" type="checkbox" value="phone"> Điện thoại</label>
+            <label for="notes">Ghi chú</label>
+            <textarea id="notes" name="notes" rows="4"></textarea>
+          </fieldset>
+          <button type="submit">Lưu</button>
+          <button type="reset">Nhập lại</button>
+        </form>
+      </section>
+
+      <!-- Hồ sơ nhanh: cung cấp bản xem trước của một nhân viên được chọn. -->
+      <aside aria-labelledby="quick-profile-heading">
+        <h2 id="quick-profile-heading">Hồ sơ nhanh</h2>
+        <article>
+          <figure>
+            <img src="assets/images/avatar-placeholder.svg" alt="Ảnh đại diện mẫu của Nguyễn Minh Anh" width="160" height="160">
+            <figcaption>Ảnh hồ sơ tạm thời</figcaption>
+          </figure>
+          <h2>Nguyễn Minh Anh</h2>
+          <dl>
+            <dt>Mã nhân viên</dt>
+            <dd>NV001</dd>
+            <dt>Phòng ban</dt>
+            <dd>Kỹ thuật</dd>
+            <dt>Email</dt>
+            <dd>minhanh@example.com</dd>
+          </dl>
+          <details>
+            <summary>Xem thêm thông tin</summary>
+            <p>Ngày vào làm: 15/08/2022. Chức vụ: Lập trình viên.</p>
+          </details>
+        </article>
+      </aside>
+    </main>
+
+    <!-- Chân trang: thông tin liên hệ và bản quyền dự án. -->
+    <footer>
+      <p>© 2025 HRM &amp; Payroll — Giai đoạn 1: nền tảng và kiến trúc.</p>
+      <address>Email hỗ trợ: <a href="mailto:hrm@example.com">hrm@example.com</a></address>
+    </footer>
+  </body>
+</html>

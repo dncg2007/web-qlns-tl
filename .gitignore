@@ -1,0 +1,15 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.log
+
+# Local tooling/cache
+node_modules/
+.zcode/

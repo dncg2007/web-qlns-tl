@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Ảnh đại diện mẫu</title>
+  <desc id="desc">Hình minh họa đại diện tạm thời cho hồ sơ nhân viên.</desc>
+  <rect width="160" height="160" fill="#e5e7eb"/>
+  <circle cx="80" cy="60" r="28" fill="#9ca3af"/>
+  <path d="M32 140c5-31 22-46 48-46s43 15 48 46" fill="#9ca3af"/>
+</svg>
