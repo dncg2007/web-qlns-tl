@@ -13,6 +13,7 @@ const PHONG_BAN = [
   { MaPB: "PB10", TenPB: "Phòng Chăm sóc khách hàng", MoTa: "Hỗ trợ và giải đáp khách hàng.", MaTruongPhong: "NV0014" }
 ];
 
+/* TrangThai là trường mô phỏng dẫn xuất từ view dbo.v_NhanVien_TrangThai: DangLam khi có hợp đồng hiệu lực (TuNgay <= ngày tham chiếu và (DenNgay NULL hoặc DenNgay >= ngày tham chiếu)); ngược lại là DaNghi. */
 const NHAN_VIEN = [
   { MaNV: "NV0001", HoTen: "Trần Minh Khoa", HinhAnh: "", GioiTinh: "Nam", NgaySinh: "1980-05-12", CMND: "900000000001", NgayCap: "2000-05-12", NoiCap: "Cục Cảnh sát QLHC về TTXH", QueQuan: "Hà Nội", DienThoai: "0900000001", Email: "khoa.tran@example.com", LoaiNV: "ChinhThuc", MaPB: "PB01", ChucVu: "Giám đốc", MaQuanLyTrucTiep: "", TrangThai: "DangLam" },
   { MaNV: "NV0002", HoTen: "Lê Thu Hà", HinhAnh: "", GioiTinh: "Nữ", NgaySinh: "1988-09-23", CMND: "900000000002", NgayCap: "2003-09-23", NoiCap: "Cục Cảnh sát QLHC về TTXH", QueQuan: "Hải Phòng", DienThoai: "0900000002", Email: "ha.le@example.com", LoaiNV: "ChinhThuc", MaPB: "PB02", ChucVu: "Trưởng phòng", MaQuanLyTrucTiep: "NV0001", TrangThai: "DangLam" },
@@ -40,8 +41,8 @@ const MUC_LUONG = [
 ];
 
 const LUONG_NHAN_VIEN = [
-  ...NHAN_VIEN.map((nhanVien, index) => ({ MaLuong: `L${String(index + 1).padStart(4, "0")}`, MaNV: nhanVien.MaNV, MaMucLuong: index === 0 ? "ML04" : index < 4 ? "ML03" : "ML02", NgayBatDau: "2025-01-01", NgayKetThuc: null })),
-  { MaLuong: "L0011", MaNV: "NV0003", MaMucLuong: "ML01", NgayBatDau: "2023-01-01", NgayKetThuc: "2024-12-31" }
+  ...NHAN_VIEN.map((nhanVien, index) => ({ MaLuongNhanVien: `L${String(index + 1).padStart(4, "0")}`, MaNV: nhanVien.MaNV, MaMucLuong: index === 0 ? "ML04" : index < 4 ? "ML03" : "ML02", NgayBatDau: "2025-01-01", NgayKetThuc: null })),
+  { MaLuongNhanVien: "L0011", MaNV: "NV0003", MaMucLuong: "ML01", NgayBatDau: "2023-01-01", NgayKetThuc: "2024-12-31" }
 ];
 
 const HOP_DONG_LAO_DONG = NHAN_VIEN.map((nhanVien, index) => ({
