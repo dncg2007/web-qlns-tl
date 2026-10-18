@@ -78,6 +78,12 @@ function demNhanVienTheoPhong(dsNV, dsPB) {
 }
 
 /** Sinh mã nhân viên kế tiếp theo độ rộng mã lớn nhất hiện có. */
+/** Suy ra trạng thái hợp đồng tại ngày tham chiếu theo view SQL, không dùng Date. */
+function suyRaTrangThai(maNV, dsHopDong, ngayThamChieu) {
+  if (typeof maNV !== "string" || !Array.isArray(dsHopDong) || typeof ngayThamChieu !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(ngayThamChieu)) return "DaNghi";
+  return dsHopDong.some((hopDong) => hopDong && hopDong.MaNV === maNV && typeof hopDong.TuNgay === "string" && hopDong.TuNgay <= ngayThamChieu && (!hopDong.DenNgay || (typeof hopDong.DenNgay === "string" && hopDong.DenNgay >= ngayThamChieu))) ? "DangLam" : "DaNghi";
+}
+
 function sinhMaNhanVien(dsNV) {
   const danhSach = Array.isArray(dsNV) ? dsNV : [];
   const maHopLe = danhSach.map((nv) => nv && typeof nv.MaNV === "string" ? nv.MaNV.match(/^(.*?)(\d+)$/) : null).filter(Boolean);
