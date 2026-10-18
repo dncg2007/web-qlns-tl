@@ -612,6 +612,37 @@ input[aria-invalid="false"] {
   font-size: var(--co-nho);
 }
 
+input[aria-invalid="true"],
+select[aria-invalid="true"] {
+  border-color: var(--mau-loi);
+  box-shadow: 0 0 0 3px var(--mau-loi-nhat);
+}
+
+.hang-moi {
+  outline: 3px solid var(--mau-thanh-cong-nhat);
+  outline-offset: -3px;
+}
+
+.nut-xem-ho-so {
+  white-space: nowrap;
+}
+
+#thong-bao-form,
+#salary-result {
+  min-height: 1.4em;
+  margin: 0;
+  color: var(--mau-thanh-cong);
+  font-size: var(--co-nho);
+}
+
+#than-bang-luong .so-tien {
+  white-space: nowrap;
+}
+
+#tong-bang-luong {
+  font-weight: 700;
+}
+
 /* Components — Tables. */
 .so-tien {
   font-variant-numeric: tabular-nums;

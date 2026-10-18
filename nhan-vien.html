@@ -92,6 +92,7 @@
                 <th scope="col">Phòng ban</th>
                 <th scope="col">Điện thoại</th>
                 <th scope="col">Trạng thái</th>
+                <th scope="col">Thao tác</th>
               </tr>
             </thead>
             <tbody id="than-bang-nhan-vien"></tbody>
@@ -102,60 +103,60 @@
       <!-- Biểu mẫu hồ sơ: chia thành bốn fieldset để nhóm thông tin theo trách nhiệm dữ liệu. -->
       <section class="khu-bieu-mau the" id="employee-form" aria-labelledby="employee-form-heading">
         <h2 id="employee-form-heading">Thêm hoặc sửa hồ sơ nhân viên</h2>
-        <form action="#employee-list" method="post">
+        <form action="#employee-list" method="post" novalidate>
           <fieldset>
             <legend>Thông tin định danh</legend>
             <label for="employee-id">Mã nhân viên</label>
-            <input id="employee-id" name="employee-id" type="text" required>
+            <input id="employee-id" name="employee-id" type="text" readonly aria-describedby="loi-ma-nv">
+            <small class="thong-bao-loi" id="loi-ma-nv" aria-live="polite"></small>
             <label for="full-name">Họ và tên</label>
-            <input id="full-name" name="full-name" type="text" aria-describedby="loi-ho-ten" required>
-            <p class="thong-bao-loi" id="loi-ho-ten"></p>
+            <input id="full-name" name="HoTen" type="text" autocomplete="name" aria-describedby="loi-ho-ten" required>
+            <small class="thong-bao-loi" id="loi-ho-ten" role="alert" aria-live="polite"></small>
             <label for="birth-date">Ngày sinh</label>
-            <input id="birth-date" name="birth-date" type="date">
+            <input id="birth-date" name="NgaySinh" type="date" autocomplete="bday" aria-describedby="loi-ngay-sinh" required>
+            <small class="thong-bao-loi" id="loi-ngay-sinh" role="alert" aria-live="polite"></small>
             <p>Giới tính</p>
-            <label for="gender-male"><input id="gender-male" name="gender" type="radio" value="male"> Nam</label>
-            <label for="gender-female"><input id="gender-female" name="gender" type="radio" value="female"> Nữ</label>
-            <label for="gender-other"><input id="gender-other" name="gender" type="radio" value="other"> Khác</label>
+            <label for="gender-male"><input id="gender-male" name="GioiTinh" type="radio" value="Nam" required> Nam</label>
+            <label for="gender-female"><input id="gender-female" name="GioiTinh" type="radio" value="Nữ"> Nữ</label>
+            <label for="gender-other"><input id="gender-other" name="GioiTinh" type="radio" value="Khác"> Khác</label>
+            <small class="thong-bao-loi" id="loi-gioi-tinh" role="alert" aria-live="polite"></small>
           </fieldset>
 
           <fieldset>
             <legend>Thông tin liên hệ</legend>
+            <label for="cmnd">CMND/CCCD</label>
+            <input id="cmnd" name="CMND" type="text" inputmode="numeric" pattern="^\d{9}(\d{3})?$" autocomplete="off" required aria-describedby="loi-cmnd">
+            <small class="thong-bao-loi" id="loi-cmnd" role="alert" aria-live="polite"></small>
+            <label for="issue-date">Ngày cấp</label>
+            <input id="issue-date" name="NgayCap" type="date" required aria-describedby="loi-ngay-cap">
+            <small class="thong-bao-loi" id="loi-ngay-cap" role="alert" aria-live="polite"></small>
+            <label for="issue-place">Nơi cấp</label>
+            <input id="issue-place" name="NoiCap" type="text" required aria-describedby="loi-noi-cap">
+            <small class="thong-bao-loi" id="loi-noi-cap" role="alert" aria-live="polite"></small>
+            <label for="hometown">Quê quán</label>
+            <input id="hometown" name="QueQuan" type="text" required aria-describedby="loi-que-quan">
+            <small class="thong-bao-loi" id="loi-que-quan" role="alert" aria-live="polite"></small>
             <label for="email">Email</label>
-            <input id="email" name="email" type="email" aria-describedby="loi-email" required>
-            <p class="thong-bao-loi" id="loi-email"></p>
+            <input id="email" name="Email" type="email" autocomplete="email">
             <label for="phone">Số điện thoại</label>
-            <input id="phone" name="phone" type="tel" aria-describedby="loi-dien-thoai">
-            <p class="thong-bao-loi" id="loi-dien-thoai"></p>
-            <label for="address">Địa chỉ</label>
-            <textarea id="address" name="address" rows="3"></textarea>
+            <input id="phone" name="DienThoai" type="tel" pattern="^0\d{9}$" autocomplete="tel" required aria-describedby="loi-dien-thoai">
+            <small class="thong-bao-loi" id="loi-dien-thoai" role="alert" aria-live="polite"></small>
           </fieldset>
 
           <fieldset>
             <legend>Thông tin công việc</legend>
-            <label for="join-date">Ngày vào làm</label>
-            <input id="join-date" name="join-date" type="date" required>
             <label for="employee-department">Phòng ban</label>
-            <select id="employee-department" name="employee-department" required>
+            <select id="employee-department" name="MaPB" required aria-describedby="loi-phong-ban">
               <option value="">Chọn phòng ban</option>
-              <option value="ky-thuat">Kỹ thuật</option>
-              <option value="kinh-doanh">Kinh doanh</option>
-              <option value="nhan-su">Nhân sự</option>
-              <option value="tai-chinh">Tài chính</option>
             </select>
+            <small class="thong-bao-loi" id="loi-phong-ban" role="alert" aria-live="polite"></small>
             <label for="position">Chức vụ</label>
-            <input id="position" name="position" type="text">
+            <input id="position" name="ChucVu" type="text" required aria-describedby="loi-chuc-vu">
+            <small class="thong-bao-loi" id="loi-chuc-vu" role="alert" aria-live="polite"></small>
           </fieldset>
 
-          <fieldset>
-            <legend>Chế độ và ghi chú</legend>
-            <p>Phụ cấp áp dụng</p>
-            <label for="allowance-lunch"><input id="allowance-lunch" name="allowance" type="checkbox" value="lunch"> Ăn trưa</label>
-            <label for="allowance-travel"><input id="allowance-travel" name="allowance" type="checkbox" value="travel"> Đi lại</label>
-            <label for="allowance-phone"><input id="allowance-phone" name="allowance" type="checkbox" value="phone"> Điện thoại</label>
-            <label for="notes">Ghi chú</label>
-            <textarea id="notes" name="notes" rows="4"></textarea>
-          </fieldset>
           <button class="nut" type="submit">Lưu</button>
+          <p id="thong-bao-form" aria-live="polite"></p>
           <button class="nut nut-vien" type="reset">Nhập lại</button>
         </form>
       </section>
@@ -168,14 +169,25 @@
             <img src="assets/images/avatar-placeholder.svg" alt="Ảnh đại diện mẫu của Nguyễn Minh Anh" width="160" height="160">
             <figcaption>Ảnh hồ sơ tạm thời</figcaption>
           </figure>
-          <h2>Nguyễn Minh Anh</h2>
+          <p id="huong-dan-ho-so">Chọn một nhân viên để xem hồ sơ.</p>
+          <h2 id="ho-so-ho-ten">Chưa chọn nhân viên</h2>
           <dl>
             <dt>Mã nhân viên</dt>
-            <dd>NV001</dd>
+            <dd id="ho-so-ma-nv">—</dd>
             <dt>Phòng ban</dt>
-            <dd>Kỹ thuật</dd>
-            <dt>Email</dt>
-            <dd>minhanh@example.com</dd>
+            <dd id="ho-so-phong-ban">—</dd>
+            <dt>CMND/CCCD</dt>
+            <dd id="ho-so-cmnd">—</dd>
+            <dt>Ngày cấp</dt>
+            <dd id="ho-so-ngay-cap">—</dd>
+            <dt>Nơi cấp</dt>
+            <dd id="ho-so-noi-cap">—</dd>
+            <dt>Quê quán</dt>
+            <dd id="ho-so-que-quan">—</dd>
+            <dt>Mức lương</dt>
+            <dd id="ho-so-muc-luong">—</dd>
+            <dt>Hợp đồng</dt>
+            <dd id="ho-so-hop-dong">—</dd>
           </dl>
           <details>
             <summary>Xem thêm thông tin</summary>

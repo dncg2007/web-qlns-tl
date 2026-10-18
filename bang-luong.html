@@ -42,16 +42,21 @@
       <!-- Bộ chọn tháng: xác định kỳ lương cần xem. -->
       <section class="khu-chon-thang the" aria-labelledby="month-selector-heading">
         <h2 id="month-selector-heading">Chọn tháng tính lương</h2>
-        <form action="#salary-table" method="get">
+        <form id="form-bang-luong" action="#salary-table" method="get" aria-label="Bộ lọc bảng lương">
           <label for="salary-month">Tháng</label>
-          <input id="salary-month" name="salary-month" type="month" value="2025-06" required>
+          <input id="salary-month" name="salary-month" type="month" value="2026-10" required>
+          <label for="salary-department">Phòng ban</label>
+          <select id="salary-department" name="salary-department">
+            <option value="">Tất cả phòng ban</option>
+          </select>
           <button class="nut" type="submit">Tính lương</button>
         </form>
       </section>
 
       <!-- Bảng dữ liệu: div chỉ bọc bảng để hỗ trợ cuộn ngang khi màn hình hẹp. -->
       <section class="khu-bang" id="salary-table" aria-labelledby="salary-table-heading">
-        <h2 id="salary-table-heading">Bảng chấm công và lương tháng 06/2025</h2>
+        <h2 id="salary-table-heading">Bảng chấm công và lương tháng 10/2026</h2>
+        <p id="salary-result" aria-live="polite">Chưa tải bảng lương.</p>
         <!-- GĐ3 sẽ bật tắt hidden bằng JavaScript; gỡ hidden trong DevTools để xem thử. -->
         <p class="trang-thai-tai" role="status" hidden><span class="vong-quay" aria-hidden="true"></span>Đang tính lương…</p>
         <div class="bang-cuon">
@@ -68,7 +73,7 @@
                 <th scope="col">Thực lĩnh</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="than-bang-luong">
               <tr>
                 <td data-cot="Mã NV">NV001</td>
                 <td data-cot="Họ và tên">Nguyễn Minh Anh</td>
@@ -107,9 +112,9 @@
               </tr>
             </tbody>
             <tfoot>
-              <tr>
-                <th scope="row" colspan="6">Tổng quỹ lương mẫu</th>
-                <td class="so-tien" data-cot="Tổng quỹ lương mẫu">85.500.000 VNĐ</td>
+              <tr id="tong-bang-luong">
+                <th scope="row" colspan="6">Tổng quỹ lương</th>
+                <td class="so-tien" data-cot="Tổng quỹ lương">0 đ</td>
               </tr>
             </tfoot>
           </table>
