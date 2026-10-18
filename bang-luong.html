@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bảng lương | HRM &amp; Payroll</title>
     <meta name="description" content="Theo dõi ngày công, lương, phụ cấp và tổng quỹ lương theo tháng.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/data.js" defer></script>
     <script src="js/logic.js" defer></script>
@@ -18,9 +19,11 @@
       <form role="search" action="#" method="get">
         <label for="global-search">Tìm kiếm nhanh</label>
         <input id="global-search" name="q" type="search" placeholder="Tìm nhân viên hoặc phòng ban">
-        <button type="submit">Tìm</button>
+        <button class="nut nut-nho" type="submit">Tìm</button>
       </form>
-      <button type="button">Dark Mode</button>
+      <!-- Dùng checkbox để CSS :has() chuyển token Sáng/Tối trong giai đoạn chưa viết JavaScript. -->
+      <input id="che-do-toi" type="checkbox">
+      <label for="che-do-toi">Chế độ tối</label>
     </header>
 
     <!-- Điều hướng chính: đánh dấu trang hiện tại bằng aria-current. -->
@@ -33,23 +36,25 @@
     </nav>
 
     <!-- Nội dung chính của trang bảng lương. -->
-    <main>
-      <h1>Bảng lương</h1>
+    <main class="trang-bang-luong">
+      <h1 class="tieu-de animate__animated animate__fadeInDown">Bảng lương</h1>
 
       <!-- Bộ chọn tháng: xác định kỳ lương cần xem. -->
-      <section aria-labelledby="month-selector-heading">
+      <section class="khu-chon-thang the" aria-labelledby="month-selector-heading">
         <h2 id="month-selector-heading">Chọn tháng tính lương</h2>
         <form action="#salary-table" method="get">
           <label for="salary-month">Tháng</label>
           <input id="salary-month" name="salary-month" type="month" value="2025-06" required>
-          <button type="submit">Xem bảng lương</button>
+          <button class="nut" type="submit">Tính lương</button>
         </form>
       </section>
 
       <!-- Bảng dữ liệu: div chỉ bọc bảng để hỗ trợ cuộn ngang khi màn hình hẹp. -->
-      <section id="salary-table" aria-labelledby="salary-table-heading">
+      <section class="khu-bang" id="salary-table" aria-labelledby="salary-table-heading">
         <h2 id="salary-table-heading">Bảng chấm công và lương tháng 06/2025</h2>
-        <div>
+        <!-- GĐ3 sẽ bật tắt hidden bằng JavaScript; gỡ hidden trong DevTools để xem thử. -->
+        <p class="trang-thai-tai" role="status" hidden><span class="vong-quay" aria-hidden="true"></span>Đang tính lương…</p>
+        <div class="bang-cuon">
           <table>
             <caption>Ngày công, lương cơ bản, phụ cấp và thực lĩnh của nhân viên</caption>
             <thead>
@@ -65,46 +70,46 @@
             </thead>
             <tbody>
               <tr>
-                <td>NV001</td>
-                <td>Nguyễn Minh Anh</td>
-                <td>Kỹ thuật</td>
-                <td><label for="workdays-nv001">Ngày công NV001</label><input id="workdays-nv001" name="workdays-nv001" type="number" min="0" max="31" value="26"></td>
-                <td>24.000.000 VNĐ</td>
-                <td>2.000.000 VNĐ</td>
-                <td>26.000.000 VNĐ</td>
+                <td data-cot="Mã NV">NV001</td>
+                <td data-cot="Họ và tên">Nguyễn Minh Anh</td>
+                <td data-cot="Phòng ban">Kỹ thuật</td>
+                <td data-cot="Ngày công"><label for="workdays-nv001">Ngày công NV001</label><input id="workdays-nv001" name="workdays-nv001" type="number" min="0" max="31" value="26"></td>
+                <td class="so-tien" data-cot="Lương cơ bản">24.000.000 VNĐ</td>
+                <td class="so-tien" data-cot="Phụ cấp">2.000.000 VNĐ</td>
+                <td class="so-tien" data-cot="Thực lĩnh">26.000.000 VNĐ</td>
               </tr>
               <tr>
-                <td>NV002</td>
-                <td>Trần Quốc Bảo</td>
-                <td>Kinh doanh</td>
-                <td><label for="workdays-nv002">Ngày công NV002</label><input id="workdays-nv002" name="workdays-nv002" type="number" min="0" max="31" value="25"></td>
-                <td>20.000.000 VNĐ</td>
-                <td>3.000.000 VNĐ</td>
-                <td>23.000.000 VNĐ</td>
+                <td data-cot="Mã NV">NV002</td>
+                <td data-cot="Họ và tên">Trần Quốc Bảo</td>
+                <td data-cot="Phòng ban">Kinh doanh</td>
+                <td data-cot="Ngày công"><label for="workdays-nv002">Ngày công NV002</label><input id="workdays-nv002" name="workdays-nv002" type="number" min="0" max="31" value="25"></td>
+                <td class="so-tien" data-cot="Lương cơ bản">20.000.000 VNĐ</td>
+                <td class="so-tien" data-cot="Phụ cấp">3.000.000 VNĐ</td>
+                <td class="so-tien" data-cot="Thực lĩnh">23.000.000 VNĐ</td>
               </tr>
               <tr>
-                <td>NV003</td>
-                <td>Lê Thu Hà</td>
-                <td>Nhân sự</td>
-                <td><label for="workdays-nv003">Ngày công NV003</label><input id="workdays-nv003" name="workdays-nv003" type="number" min="0" max="31" value="24"></td>
-                <td>16.000.000 VNĐ</td>
-                <td>1.500.000 VNĐ</td>
-                <td>17.500.000 VNĐ</td>
+                <td data-cot="Mã NV">NV003</td>
+                <td data-cot="Họ và tên">Lê Thu Hà</td>
+                <td data-cot="Phòng ban">Nhân sự</td>
+                <td data-cot="Ngày công"><label for="workdays-nv003">Ngày công NV003</label><input id="workdays-nv003" name="workdays-nv003" type="number" min="0" max="31" value="24"></td>
+                <td class="so-tien" data-cot="Lương cơ bản">16.000.000 VNĐ</td>
+                <td class="so-tien" data-cot="Phụ cấp">1.500.000 VNĐ</td>
+                <td class="so-tien" data-cot="Thực lĩnh">17.500.000 VNĐ</td>
               </tr>
               <tr>
-                <td>NV004</td>
-                <td>Phạm Gia Huy</td>
-                <td>Tài chính</td>
-                <td><label for="workdays-nv004">Ngày công NV004</label><input id="workdays-nv004" name="workdays-nv004" type="number" min="0" max="31" value="26"></td>
-                <td>18.000.000 VNĐ</td>
-                <td>1.000.000 VNĐ</td>
-                <td>19.000.000 VNĐ</td>
+                <td data-cot="Mã NV">NV004</td>
+                <td data-cot="Họ và tên">Phạm Gia Huy</td>
+                <td data-cot="Phòng ban">Tài chính</td>
+                <td data-cot="Ngày công"><label for="workdays-nv004">Ngày công NV004</label><input id="workdays-nv004" name="workdays-nv004" type="number" min="0" max="31" value="26"></td>
+                <td class="so-tien" data-cot="Lương cơ bản">18.000.000 VNĐ</td>
+                <td class="so-tien" data-cot="Phụ cấp">1.000.000 VNĐ</td>
+                <td class="so-tien" data-cot="Thực lĩnh">19.000.000 VNĐ</td>
               </tr>
             </tbody>
             <tfoot>
               <tr>
                 <th scope="row" colspan="6">Tổng quỹ lương mẫu</th>
-                <td>85.500.000 VNĐ</td>
+                <td class="so-tien" data-cot="Tổng quỹ lương mẫu">85.500.000 VNĐ</td>
               </tr>
             </tfoot>
           </table>
@@ -112,9 +117,9 @@
       </section>
 
       <!-- Phiếu lương: bản xem trước thông tin chi tiết của một nhân viên. -->
-      <aside aria-labelledby="payslip-heading">
+      <aside class="phieu-luong" aria-labelledby="payslip-heading">
         <h2 id="payslip-heading">Phiếu lương cá nhân</h2>
-        <article>
+        <article class="the animate__animated animate__fadeInRight">
           <h2>Nguyễn Minh Anh — Tháng 06/2025</h2>
           <dl>
             <dt>Ngày công</dt>
@@ -127,7 +132,7 @@
             <dd>26.000.000 VNĐ</dd>
           </dl>
           <p>Phiếu lương đang ở dạng bản xem trước tĩnh.</p>
-          <button type="button">In</button>
+          <button class="nut" type="button">In</button>
         </article>
       </aside>
     </main>

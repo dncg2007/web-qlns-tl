@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tổng quan | HRM &amp; Payroll</title>
     <meta name="description" content="Dashboard tổng quan về nhân sự, quỹ lương và hợp đồng sắp hết hạn của doanh nghiệp.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/data.js" defer></script>
     <script src="js/logic.js" defer></script>
@@ -18,9 +19,11 @@
       <form role="search" action="#" method="get">
         <label for="global-search">Tìm kiếm nhanh</label>
         <input id="global-search" name="q" type="search" placeholder="Tìm nhân viên hoặc phòng ban">
-        <button type="submit">Tìm</button>
+        <button class="nut nut-nho" type="submit">Tìm</button>
       </form>
-      <button type="button">Dark Mode</button>
+      <!-- Dùng checkbox để CSS :has() chuyển token Sáng/Tối trong giai đoạn chưa viết JavaScript. -->
+      <input id="che-do-toi" type="checkbox">
+      <label for="che-do-toi">Chế độ tối</label>
     </header>
 
     <!-- Điều hướng chính: liên kết qua lại giữa ba màn hình nghiệp vụ. -->
@@ -33,70 +36,70 @@
     </nav>
 
     <!-- Nội dung chính của trang dashboard. -->
-    <main>
-      <h1>Tổng quan</h1>
+    <main class="trang-tong-quan">
+      <h1 class="tieu-de animate__animated animate__fadeInDown">Tổng quan</h1>
 
       <!-- Khu vực KPI: tóm tắt các chỉ số quản trị quan trọng. -->
-      <section aria-labelledby="kpi-heading">
+      <section class="khu-kpi" aria-labelledby="kpi-heading">
         <h2 id="kpi-heading">Chỉ số chính</h2>
-        <article>
+        <article class="the the-tuong-tac animate__animated animate__fadeInUp">
           <h3>Tổng nhân viên</h3>
-          <p>128</p>
-          <p>Đang làm việc</p>
+          <p class="so-kpi">128</p>
+          <p class="nhan-kpi">Đang làm việc</p>
         </article>
-        <article>
+        <article class="the the-tuong-tac animate__animated animate__fadeInUp animate__delay-1s">
           <h3>Quỹ lương tháng</h3>
-          <p>1.280.000.000 VNĐ</p>
-          <p>Tháng 06/2025</p>
+          <p class="so-kpi">1.280.000.000 VNĐ</p>
+          <p class="nhan-kpi">Tháng 06/2025</p>
         </article>
-        <article>
+        <article class="the the-tuong-tac animate__animated animate__fadeInUp animate__delay-2s">
           <h3>Ngày công trung bình</h3>
-          <p>25,4 ngày</p>
-          <p>Toàn doanh nghiệp</p>
+          <p class="so-kpi">25,4 ngày</p>
+          <p class="nhan-kpi">Toàn doanh nghiệp</p>
         </article>
-        <article>
+        <article class="the the-tuong-tac animate__animated animate__fadeInUp animate__delay-3s">
           <h3>Hợp đồng sắp hết hạn</h3>
-          <p>7</p>
-          <p>Trong 30 ngày tới</p>
+          <p class="so-kpi">7</p>
+          <p class="nhan-kpi">Trong 30 ngày tới</p>
         </article>
       </section>
 
       <!-- Khu vực biểu đồ: trình bày quỹ lương theo phòng ban bằng dữ liệu tĩnh. -->
-      <section aria-labelledby="salary-chart-heading">
+      <section class="khu-bieu-do" aria-labelledby="salary-chart-heading">
         <h2 id="salary-chart-heading">Quỹ lương theo phòng ban</h2>
-        <article>
-          <figure>
+        <article class="the the-tuong-tac animate__animated animate__fadeIn">
+          <figure class="bieu-do-cot">
             <figcaption>Quỹ lương tháng 06/2025, đơn vị: triệu VNĐ</figcaption>
             <ul>
-              <li>Khối Kỹ thuật: 420</li>
-              <li>Khối Kinh doanh: 360</li>
-              <li>Khối Nhân sự: 180</li>
-              <li>Khối Tài chính: 220</li>
-              <li>Khối Hành chính: 100</li>
+              <li><span>Khối Kỹ thuật</span><span class="thanh ty-le-100" aria-hidden="true"></span><strong>420</strong></li>
+              <li><span>Khối Kinh doanh</span><span class="thanh ty-le-90" aria-hidden="true"></span><strong>360</strong></li>
+              <li><span>Khối Nhân sự</span><span class="thanh ty-le-40" aria-hidden="true"></span><strong>180</strong></li>
+              <li><span>Khối Tài chính</span><span class="thanh ty-le-50" aria-hidden="true"></span><strong>220</strong></li>
+              <li><span>Khối Hành chính</span><span class="thanh ty-le-30" aria-hidden="true"></span><strong>100</strong></li>
             </ul>
           </figure>
         </article>
       </section>
 
       <!-- Khu vực cảnh báo: liệt kê các hợp đồng cần được theo dõi. -->
-      <section aria-labelledby="expiring-contract-heading">
+      <section class="khu-het-han" aria-labelledby="expiring-contract-heading">
         <h2 id="expiring-contract-heading">Hợp đồng sắp hết hạn</h2>
-        <article>
-          <ul>
-            <li>Nguyễn Minh Anh — <time datetime="2025-07-05">05/07/2025</time></li>
-            <li>Trần Quốc Bảo — <time datetime="2025-07-12">12/07/2025</time></li>
-            <li>Lê Thu Hà — <time datetime="2025-07-20">20/07/2025</time></li>
+        <article class="the the-tuong-tac">
+          <ul class="ds-hop-dong">
+            <li data-het-han="true"><span>Nguyễn Minh Anh</span><time datetime="2025-07-05">05/07/2025</time></li>
+            <li data-het-han="true"><span>Trần Quốc Bảo</span><time datetime="2025-07-12">12/07/2025</time></li>
+            <li data-het-han="true"><span>Lê Thu Hà</span><time datetime="2025-07-20">20/07/2025</time></li>
           </ul>
         </article>
       </section>
 
       <!-- Lối tắt: dẫn đến các tác vụ thường dùng. -->
-      <aside aria-labelledby="shortcut-heading">
+      <aside class="khu-loi-tat" aria-labelledby="shortcut-heading">
         <h2 id="shortcut-heading">Lối tắt</h2>
         <ul>
-          <li><a href="nhan-vien.html#employee-form">Thêm nhân viên</a></li>
-          <li><a href="nhan-vien.html#employee-list">Xem danh sách nhân viên</a></li>
-          <li><a href="bang-luong.html#salary-table">Xem bảng lương tháng</a></li>
+          <li><a class="nut nut-vien" href="nhan-vien.html#employee-form">Thêm nhân viên</a></li>
+          <li><a class="nut nut-vien" href="nhan-vien.html#employee-list">Xem danh sách nhân viên</a></li>
+          <li><a class="nut nut-vien" href="bang-luong.html#salary-table">Xem bảng lương tháng</a></li>
         </ul>
       </aside>
     </main>

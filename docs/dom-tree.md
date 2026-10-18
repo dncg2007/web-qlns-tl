@@ -7,7 +7,8 @@ body (grid, không bọc div)
 ├── header
 │   ├── a (tên hệ thống)
 │   ├── form[role="search"]
-│   └── button (Dark Mode)
+│   ├── input[type="checkbox"]#che-do-toi
+│   └── label[for="che-do-toi"] (Chế độ tối)
 ├── nav[aria-label]
 │   └── ul
 │       └── li × 3
