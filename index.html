@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tổng quan | HRM &amp; Payroll</title>
     <meta name="description" content="Dashboard tổng quan về nhân sự, quỹ lương và hợp đồng sắp hết hạn của doanh nghiệp.">
+    <script src="js/theme.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/data.js" defer></script>
@@ -21,9 +22,8 @@
         <input id="global-search" name="q" type="search" placeholder="Tìm nhân viên hoặc phòng ban">
         <button class="nut nut-nho" type="submit">Tìm</button>
       </form>
-      <!-- Dùng checkbox để CSS :has() chuyển token Sáng/Tối trong giai đoạn chưa viết JavaScript. -->
-      <input id="che-do-toi" type="checkbox">
-      <label for="che-do-toi">Chế độ tối</label>
+      <!-- Nút dùng theme.js và data-theme để đổi giao diện, script không defer nhằm tránh nháy màu. -->
+      <button class="nut nut-nho" id="nut-doi-giao-dien" type="button" aria-pressed="false" aria-label="Chuyển sang giao diện tối">Giao diện tối</button>
     </header>
 
     <!-- Điều hướng chính: liên kết qua lại giữa ba màn hình nghiệp vụ. -->
@@ -44,39 +44,33 @@
         <h2 id="kpi-heading">Chỉ số chính</h2>
         <article class="the the-tuong-tac animate__animated animate__fadeInUp">
           <h3>Tổng nhân viên</h3>
-          <p class="so-kpi">128</p>
-          <p class="nhan-kpi">Đang làm việc</p>
+          <p class="so-kpi" id="kpi-tong">0</p>
+          <p class="nhan-kpi">Tổng quân số</p>
         </article>
         <article class="the the-tuong-tac animate__animated animate__fadeInUp animate__delay-1s">
-          <h3>Quỹ lương tháng</h3>
-          <p class="so-kpi">1.280.000.000 VNĐ</p>
-          <p class="nhan-kpi">Tháng 06/2025</p>
+          <h3>Đang làm việc</h3>
+          <p class="so-kpi" id="kpi-dang-lam">0</p>
+          <p class="nhan-kpi">Theo trạng thái hợp đồng</p>
         </article>
         <article class="the the-tuong-tac animate__animated animate__fadeInUp animate__delay-2s">
-          <h3>Ngày công trung bình</h3>
-          <p class="so-kpi">25,4 ngày</p>
-          <p class="nhan-kpi">Toàn doanh nghiệp</p>
+          <h3>Quỹ lương tháng</h3>
+          <p class="so-kpi" id="kpi-quy-luong">0 đ</p>
+          <p class="nhan-kpi">Tháng 10/2026</p>
         </article>
         <article class="the the-tuong-tac animate__animated animate__fadeInUp animate__delay-3s">
-          <h3>Hợp đồng sắp hết hạn</h3>
-          <p class="so-kpi">7</p>
-          <p class="nhan-kpi">Trong 30 ngày tới</p>
+          <h3>Lương trung bình</h3>
+          <p class="so-kpi" id="kpi-luong-trung-binh">0 đ</p>
+          <p class="nhan-kpi">Nhân viên có chấm công</p>
         </article>
       </section>
 
       <!-- Khu vực biểu đồ: trình bày quỹ lương theo phòng ban bằng dữ liệu tĩnh. -->
       <section class="khu-bieu-do" aria-labelledby="salary-chart-heading">
-        <h2 id="salary-chart-heading">Quỹ lương theo phòng ban</h2>
+        <h2 id="salary-chart-heading">Quân số theo phòng ban</h2>
         <article class="the the-tuong-tac animate__animated animate__fadeIn">
           <figure class="bieu-do-cot">
-            <figcaption>Quỹ lương tháng 06/2025, đơn vị: triệu VNĐ</figcaption>
-            <ul>
-              <li><span>Khối Kỹ thuật</span><span class="thanh ty-le-100" aria-hidden="true"></span><strong>420</strong></li>
-              <li><span>Khối Kinh doanh</span><span class="thanh ty-le-90" aria-hidden="true"></span><strong>360</strong></li>
-              <li><span>Khối Nhân sự</span><span class="thanh ty-le-40" aria-hidden="true"></span><strong>180</strong></li>
-              <li><span>Khối Tài chính</span><span class="thanh ty-le-50" aria-hidden="true"></span><strong>220</strong></li>
-              <li><span>Khối Hành chính</span><span class="thanh ty-le-30" aria-hidden="true"></span><strong>100</strong></li>
-            </ul>
+            <figcaption>Quân số theo phòng ban tháng 10/2026</figcaption>
+            <ul id="dashboard-bieu-do" aria-label="Quân số theo phòng ban"></ul>
           </figure>
         </article>
       </section>
@@ -85,17 +79,14 @@
       <section class="khu-het-han" aria-labelledby="expiring-contract-heading">
         <h2 id="expiring-contract-heading">Hợp đồng sắp hết hạn</h2>
         <article class="the the-tuong-tac">
-          <ul class="ds-hop-dong">
-            <li data-het-han="true"><span>Nguyễn Minh Anh</span><time datetime="2025-07-05">05/07/2025</time></li>
-            <li data-het-han="true"><span>Trần Quốc Bảo</span><time datetime="2025-07-12">12/07/2025</time></li>
-            <li data-het-han="true"><span>Lê Thu Hà</span><time datetime="2025-07-20">20/07/2025</time></li>
-          </ul>
+          <ul class="ds-hop-dong" id="dashboard-hop-dong" aria-label="Hợp đồng sắp hết hạn"></ul>
         </article>
       </section>
 
       <!-- Lối tắt: dẫn đến các tác vụ thường dùng. -->
       <aside class="khu-loi-tat" aria-labelledby="shortcut-heading">
         <h2 id="shortcut-heading">Lối tắt</h2>
+        <p id="dashboard-theo-phong" aria-live="polite"></p>
         <ul>
           <li><a class="nut nut-vien" href="nhan-vien.html#employee-form">Thêm nhân viên</a></li>
           <li><a class="nut nut-vien" href="nhan-vien.html#employee-list">Xem danh sách nhân viên</a></li>

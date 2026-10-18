@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bảng lương | HRM &amp; Payroll</title>
     <meta name="description" content="Theo dõi ngày công, lương, phụ cấp và tổng quỹ lương theo tháng.">
+    <script src="js/theme.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/data.js" defer></script>
@@ -21,9 +22,8 @@
         <input id="global-search" name="q" type="search" placeholder="Tìm nhân viên hoặc phòng ban">
         <button class="nut nut-nho" type="submit">Tìm</button>
       </form>
-      <!-- Dùng checkbox để CSS :has() chuyển token Sáng/Tối trong giai đoạn chưa viết JavaScript. -->
-      <input id="che-do-toi" type="checkbox">
-      <label for="che-do-toi">Chế độ tối</label>
+      <!-- Nút dùng theme.js và data-theme để đổi giao diện, script không defer nhằm tránh nháy màu. -->
+      <button class="nut nut-nho" id="nut-doi-giao-dien" type="button" aria-pressed="false" aria-label="Chuyển sang giao diện tối">Giao diện tối</button>
     </header>
 
     <!-- Điều hướng chính: đánh dấu trang hiện tại bằng aria-current. -->
