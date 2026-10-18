@@ -45,13 +45,17 @@ const LUONG_NHAN_VIEN = [
   { MaLuongNhanVien: "L0011", MaNV: "NV0003", MaMucLuong: "ML01", NgayBatDau: "2023-01-01", NgayKetThuc: "2024-12-31" }
 ];
 
-const HOP_DONG_LAO_DONG = NHAN_VIEN.map((nhanVien, index) => ({
-  MaHD: `HD${String(index + 1).padStart(4, "0")}`,
-  MaNV: nhanVien.MaNV,
-  LoaiHD: index % 3 === 0 ? 1 : index % 3 === 1 ? 2 : 3,
-  TuNgay: "2025-01-01",
-  DenNgay: nhanVien.TrangThai === "DaNghi" ? "2025-12-31" : null
-}));
+const HOP_DONG_LAO_DONG = [
+  ...NHAN_VIEN.map((nhanVien, index) => ({
+    MaHD: `HD${String(index + 1).padStart(4, "0")}`,
+    MaNV: nhanVien.MaNV,
+    LoaiHD: index % 3 === 0 ? 1 : index % 3 === 1 ? 2 : 3,
+    TuNgay: "2025-01-01",
+    DenNgay: nhanVien.MaNV === "NV0005" || nhanVien.MaNV === "NV0010" ? "2025-12-31" : nhanVien.TrangThai === "DaNghi" ? "2025-12-31" : null
+  })),
+  { MaHD: "HD0017", MaNV: "NV0005", LoaiHD: 3, TuNgay: "2026-01-01", DenNgay: "2026-11-05" },
+  { MaHD: "HD0018", MaNV: "NV0010", LoaiHD: 3, TuNgay: "2026-01-01", DenNgay: "2026-12-10" }
+];
 
 const CHAM_CONG = NHAN_VIEN
   .filter((nhanVien) => nhanVien.TrangThai === "DangLam")
@@ -64,5 +68,7 @@ const CHAM_CONG = NHAN_VIEN
   }));
 
 const CAU_HINH = {
-  NGAY_CONG_CHUAN: 26
+  NGAY_CONG_CHUAN: 26,
+  SO_NGAY_CANH_BAO_HOP_DONG: 60,
+  NGAY_THAM_CHIEU_DEMO: "2026-10-18"
 };
