@@ -10,7 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const dongKetQua = document.querySelector("#dong-ket-qua");
 
   if (!bangNhanVien || !thanBangNhanVien || !formLoc || !oTimKiem || !locPhongBan || !locTrangThai || !dongKetQua) {
-    console.warn("features.js: Không tìm thấy đủ phần tử chính của trang nhân viên.");
+    const coHookNhanVien = bangNhanVien || thanBangNhanVien || formLoc || oTimKiem || locPhongBan || locTrangThai || dongKetQua;
+    if (coHookNhanVien) {
+      console.warn("features.js: Không tìm thấy đủ phần tử chính của trang nhân viên.");
+    }
     return;
   }
 
@@ -109,6 +112,9 @@ document.addEventListener("DOMContentLoaded", () => {
     capNhatGiaoDien();
   });
   formLoc.addEventListener("reset", () => {
-    window.setTimeout(capNhatGiaoDien, 0);
+    oTimKiem.value = "";
+    locPhongBan.value = "";
+    locTrangThai.value = "";
+    capNhatGiaoDien();
   });
 });
