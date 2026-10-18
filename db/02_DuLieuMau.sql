@@ -49,7 +49,7 @@ BEGIN TRY
         ('NV0013', N'Nguyễn Thảo Vy', NULL, N'Nữ', '1994-07-29', '900000000013', '2009-07-29', N'Cục Cảnh sát QLHC về TTXH', N'Vĩnh Long', '0900000013', NULL, 'ChinhThuc', N'Chuyên viên hành chính', 'PB08', 'NV0011'), -- [CA BIÊN: Email NULL; nhân viên có nhiều hợp đồng nối tiếp]
         ('NV0014', N'Vũ Minh Khôi', 'img/nhan-vien/NV0014.jpg', N'Nam', '1987-03-05', '900000000014', '2002-03-05', N'Cục Cảnh sát QLHC về TTXH', N'Bà Rịa - Vũng Tàu', '0900000014', 'vu.khoi@example.com', 'ChinhThuc', N'Trưởng phòng Chăm sóc khách hàng', 'PB10', 'NV0013'), -- [CA BIÊN: trưởng phòng PB10]
         ('NV0015', N'Đặng Quốc Hưng', 'img/nhan-vien/NV0015.jpg', N'Nam', '1999-09-14', '900000000015', '2014-09-14', N'Cục Cảnh sát QLHC về TTXH', N'Long An', '0900000015', 'dang.hung@example.com', 'ChinhThuc', N'Chuyên viên chăm sóc khách hàng', 'PB10', 'NV0014'),
-        ('NV0016', N'Phạm Thị Quế', 'img/nhan-vien/NV0016.jpg', N'Nữ', '1996-12-20', '900000000016', '2011-12-20', N'Cục Cảnh sát QLHC về TTXH', N'Bắc Ninh', '0900000016', 'pham.que@example.com', 'ChinhThuc', N'Chuyên viên nhân sự', 'PB02', 'NV0006');
+        ('NV0016', N'Phạm Thị Quế', 'img/nhan-vien/NV0016.jpg', N'Nữ', '1996-12-20', '900000000016', '2011-12-20', N'Cục Cảnh sát QLHC về TTXH', N'Bắc Ninh', '0900000016', 'pham.que@example.com', 'ChinhThuc', N'Chuyên viên nhân sự', 'PB02', 'NV0002');
 
     /* 3. Gán trưởng phòng sau khi NhanVien đã tồn tại. */
     UPDATE pb
@@ -84,9 +84,9 @@ BEGIN TRY
         ('HD0015', 'NV0012', 1, '2022-01-01', '2025-12-31'), -- [CA BIÊN: ChinhThuc nghỉ từ hợp đồng LoaiHD 1]
         ('HD0016', 'NV0013', 2, '2021-01-01', '2023-12-31'),
         ('HD0017', 'NV0013', 1, '2024-01-01', NULL), -- [CA BIÊN: 2 hợp đồng nối tiếp]
-        ('HD0018', 'NV0014', 2, '2024-01-01', NULL),
-        ('HD0019', 'NV0015', 2, '2025-01-01', NULL),
-        ('HD0020', 'NV0016', 2, '2025-01-01', NULL);
+        ('HD0018', 'NV0014', 2, '2024-01-01', '2027-12-31'),
+        ('HD0019', 'NV0015', 2, '2025-01-01', '2027-12-31'),
+        ('HD0020', 'NV0016', 2, '2025-01-01', '2027-12-31');
 
     COMMIT;
 END TRY

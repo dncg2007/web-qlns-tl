@@ -109,6 +109,9 @@ document.addEventListener("DOMContentLoaded", () => {
     capNhatGiaoDien();
   });
   formLoc.addEventListener("reset", () => {
-    window.setTimeout(capNhatGiaoDien, 0);
+    oTimKiem.value = "";
+    locPhongBan.value = "";
+    locTrangThai.value = "";
+    capNhatGiaoDien();
   });
 });
