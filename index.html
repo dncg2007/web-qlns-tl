@@ -13,9 +13,11 @@
     <script src="js/features.js" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#noi-dung-chinh">Bỏ qua tới nội dung</a>
+    <svg class="icon-sprite" aria-hidden="true" focusable="false"><symbol id="icon-dashboard" viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6V11h-6v9Zm0-16v5h6V4h-6Z"/></symbol><symbol id="icon-users" viewBox="0 0 24 24"><path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4ZM8 10a3 3 0 1 0-3-3 3 3 0 0 0 3 3Zm8 3c-3.31 0-6 1.79-6 4v3h12v-3c0-2.21-2.69-4-6-4ZM8 13c-2.76 0-5 1.57-5 3.5V20h5v-2c0-1.18.48-2.25 1.28-3.08A6.4 6.4 0 0 0 8 13Z"/></symbol><symbol id="icon-wallet" viewBox="0 0 24 24"><path d="M3 6a3 3 0 0 1 3-3h12v3H6a1 1 0 0 0 0 2h15v12H6a3 3 0 0 1-3-3V6Zm14 6v3h4v-3h-4Z"/></symbol><symbol id="icon-theme" viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M5.64 5.64l1.41 1.41m9.9 9.9 1.41 1.41M3 12h2m14 0h2M5.64 18.36l1.41-1.41m9.9-9.9 1.41-1.41M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"/></symbol></svg>
     <!-- Khối đầu trang: nhận diện hệ thống và thao tác dùng chung. -->
     <header>
-      <a href="index.html">HRM &amp; Payroll</a>
+      <a class="logo" href="index.html"><span class="logo-mark" aria-hidden="true">H</span><span>HRM &amp; Payroll</span></a>
       <!-- Form tìm kiếm dùng chung cho các màn hình; hành vi sẽ bổ sung ở giai đoạn sau. -->
       <form role="search" action="#" method="get">
         <label for="global-search">Tìm kiếm nhanh</label>
@@ -28,15 +30,16 @@
 
     <!-- Điều hướng chính: liên kết qua lại giữa ba màn hình nghiệp vụ. -->
     <nav aria-label="Điều hướng chính">
+      <span class="nav-brand"><span class="logo-mark" aria-hidden="true">H</span><span>HRM &amp; Payroll</span></span>
       <ul>
-        <li><a href="index.html" aria-current="page">Tổng quan</a></li>
-        <li><a href="nhan-vien.html">Nhân viên</a></li>
-        <li><a href="bang-luong.html">Bảng lương</a></li>
+        <li><a href="index.html" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#icon-dashboard"></use></svg>Tổng quan</a></li>
+        <li><a href="nhan-vien.html"><svg class="icon" aria-hidden="true"><use href="#icon-users"></use></svg>Nhân viên</a></li>
+        <li><a href="bang-luong.html"><svg class="icon" aria-hidden="true"><use href="#icon-wallet"></use></svg>Bảng lương</a></li>
       </ul>
     </nav>
 
     <!-- Nội dung chính của trang dashboard. -->
-    <main class="trang-tong-quan">
+    <main id="noi-dung-chinh" class="trang-tong-quan">
       <h1 class="tieu-de animate__animated animate__fadeInDown">Tổng quan</h1>
 
       <!-- Khu vực KPI: tóm tắt các chỉ số quản trị quan trọng. -->
