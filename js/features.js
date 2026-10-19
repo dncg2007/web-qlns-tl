@@ -17,7 +17,50 @@ document.addEventListener("DOMContentLoaded", () => {
   if (coBangLuong) {
     khoiTaoTrangBangLuong();
   }
+
+  if (document.querySelector(".trang-tong-quan")) {
+    khoiTaoDashboard();
+  }
 });
+
+function ngayThamChieuDashboard() {
+  if (CAU_HINH.NGAY_THAM_CHIEU_DEMO) return CAU_HINH.NGAY_THAM_CHIEU_DEMO;
+  const homNay = new Date();
+  return `${homNay.getFullYear()}-${String(homNay.getMonth() + 1).padStart(2, "0")}-${String(homNay.getDate()).padStart(2, "0")}`;
+}
+
+function khoiTaoDashboard() {
+  const ngayThamChieu = ngayThamChieuDashboard();
+  const bangLuong = taoBangLuong("2026-10", NHAN_VIEN, PHONG_BAN, LUONG_NHAN_VIEN, MUC_LUONG, CHAM_CONG, CAU_HINH);
+  const thongKe = thongKeDashboard(NHAN_VIEN, PHONG_BAN, bangLuong);
+  const sapHetHan = hopDongSapHetHan(HOP_DONG_LAO_DONG, NHAN_VIEN, ngayThamChieu, CAU_HINH.SO_NGAY_CANH_BAO_HOP_DONG);
+  const capNhat = (id, value) => { const node = document.querySelector(`#${id}`); if (node) node.textContent = value; };
+  capNhat("kpi-tong", thongKe.quanSo.tong);
+  capNhat("kpi-dang-lam", thongKe.quanSo.dangLam);
+  capNhat("kpi-quy-luong", dinhDangTien(thongKe.quyLuong.tongQuyLuong));
+  capNhat("kpi-luong-trung-binh", dinhDangTien(thongKe.quyLuong.luongTrungBinh));
+  const maxQuanSo = Math.max(...thongKe.theoPhong.map((dong) => dong.SoLuong), 1);
+  const bieuDo = document.querySelector("#dashboard-bieu-do");
+  if (bieuDo) {
+    bieuDo.replaceChildren(...thongKe.theoPhong.map((dong) => {
+      const muc = document.createElement("li");
+      const ten = document.createElement("span");
+      const thanh = document.createElement("span");
+      const soLuong = document.createElement("strong");
+      ten.textContent = dong.TenPB;
+      thanh.className = "thanh";
+      thanh.setAttribute("aria-hidden", "true");
+      thanh.style.setProperty("--ty-le", `${(dong.SoLuong / maxQuanSo) * 100}%`);
+      soLuong.textContent = String(dong.SoLuong);
+      muc.append(ten, thanh, soLuong);
+      return muc;
+    }));
+  }
+  const theoPhong = document.querySelector("#dashboard-theo-phong");
+  if (theoPhong) theoPhong.textContent = `Phân bổ: ${thongKe.theoPhong.map((dong) => `${dong.TenPB}: ${dong.SoLuong}`).join(" · ")}`;
+  const hopDongNode = document.querySelector("#dashboard-hop-dong");
+  if (hopDongNode) hopDongNode.innerHTML = sapHetHan.length ? sapHetHan.map((hopDong) => `<li data-het-han="true"><span>${escapeHTML(hopDong.HoTen)} (${escapeHTML(hopDong.MaNV)})</span><time datetime="${escapeHTML(hopDong.DenNgay)}">${escapeHTML(dinhDangNgay(hopDong.DenNgay))}</time></li>`).join("") : '<li><span>Không có hợp đồng sắp hết hạn</span></li>';
+}
 
 function khoiTaoTrangNhanVien(bangNhanVien) {
   const thanBangNhanVien = document.querySelector("#than-bang-nhan-vien");

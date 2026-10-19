@@ -78,6 +78,13 @@ function demNhanVienTheoPhong(dsNV, dsPB) {
 }
 
 /** Sinh mã nhân viên kế tiếp theo độ rộng mã lớn nhất hiện có. */
+/** Chọn theme hợp lệ: ưu tiên giá trị đã lưu, sau đó đến preference hệ điều hành. */
+/* Giữ đồng bộ với chonTheme trong theme.js: cùng whitelist và fallback hệ điều hành. */
+function chonGiaoDien(giaTriLuu, uaTuaHeThongToi) {
+  if (giaTriLuu === "light" || giaTriLuu === "dark") return giaTriLuu;
+  return uaTuaHeThongToi === true ? "dark" : "light";
+}
+
 /** Suy ra trạng thái hợp đồng tại ngày tham chiếu theo view SQL, không dùng Date. */
 function suyRaTrangThai(maNV, dsHopDong, ngayThamChieu) {
   if (typeof maNV !== "string" || !Array.isArray(dsHopDong) || typeof ngayThamChieu !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(ngayThamChieu)) return "DaNghi";
@@ -191,6 +198,40 @@ function tongQuyLuong(dsBangLuong) {
 function dinhDangTien(so) {
   const giaTri = Number(so);
   return Number.isFinite(giaTri) && giaTri >= 0 ? `${Math.round(giaTri).toLocaleString("vi-VN")} đ` : "0 đ";
+}
+
+/** Đổi ngày ISO thành số ngày liên tục bằng thuật toán số học, không dùng Date. */
+function soNgayTuMoc(iso) {
+  if (typeof iso !== "string" || dinhDangNgay(iso) === "—") return null;
+  const [namGoc, thangGoc, ngayGoc] = iso.split("-").map(Number);
+  const nam = namGoc - (thangGoc <= 2 ? 1 : 0);
+  const ky = Math.floor(nam / 400);
+  const namTrongKy = nam - ky * 400;
+  const thangTrongNam = thangGoc + (thangGoc > 2 ? -3 : 9);
+  const ngayTrongNam = Math.floor((153 * thangTrongNam + 2) / 5) + ngayGoc - 1;
+  const ngayTrongKy = namTrongKy * 365 + Math.floor(namTrongKy / 4) - Math.floor(namTrongKy / 100) + ngayTrongNam;
+  return ky * 146097 + ngayTrongKy;
+}
+
+/** Tìm hợp đồng sắp hết hạn trong cửa sổ cảnh báo và sắp theo ngày còn lại. */
+function hopDongSapHetHan(dsHopDong, dsNV, ngayThamChieu, soNgayCanhBao) {
+  if (!Array.isArray(dsHopDong) || !Array.isArray(dsNV) || soNgayCanhBao < 0) return [];
+  const moc = soNgayTuMoc(ngayThamChieu);
+  if (moc === null) return [];
+  return dsHopDong.map((hopDong) => {
+    const nhanVien = dsNV.find((nv) => nv && nv.MaNV === (hopDong && hopDong.MaNV));
+    const denNgay = hopDong && hopDong.DenNgay;
+    if (!hopDong || !nhanVien || !denNgay) return null;
+    const ngayKetThuc = soNgayTuMoc(denNgay);
+    if (ngayKetThuc === null) return null;
+    const soNgayConLai = ngayKetThuc - moc;
+    return soNgayConLai >= 0 && soNgayConLai <= soNgayCanhBao ? { MaNV: nhanVien.MaNV, HoTen: nhanVien.HoTen, LoaiHD: hopDong.LoaiHD, DenNgay: denNgay, SoNgayConLai: soNgayConLai } : null;
+  }).filter(Boolean).sort((a, b) => a.SoNgayConLai - b.SoNgayConLai);
+}
+
+/** Tổng hợp quân số, phòng ban và quỹ lương cho dashboard. */
+function thongKeDashboard(dsNV, dsPB, dsBangLuong) {
+  return { quanSo: thongKeNhanVien(dsNV), theoPhong: demNhanVienTheoPhong(dsNV, dsPB), quyLuong: tongQuyLuong(dsBangLuong) };
 }
 
 /** Tính ngày cuối tháng bằng phép tính số học, không dùng Date. */

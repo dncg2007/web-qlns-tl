@@ -71,11 +71,37 @@
   --chieu-cao-header: 4rem;
   --rong-nav: 12.5rem;
 
-  color-scheme: light;
+  color-scheme: light dark;
 }
 
-/* Chế độ Tối: chỉ ghi đè token, không thay đổi cấu trúc hoặc layout. */
-body:has(#che-do-toi:checked) {
+/* Bộ token tối dùng chung cho preference hệ điều hành và theme thủ công. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --mau-nen: #14171C;
+    --mau-the: #1E232B;
+    --mau-vien: #2E3540;
+    --chu-1: #E8EBF0;
+    --chu-2: #C3C9D4;
+    --chu-3: #A4ACBA;
+    --mau-chinh: #7FA8EF;
+    --mau-chinh-dam: #A9C4F5;
+    --mau-chinh-nhat: #22303F;
+    --mau-phu: #F0BD4A;
+    --mau-tren-chinh: #0F1520;
+    --mau-thanh-cong: #6FCF8B;
+    --mau-thanh-cong-nhat: #1B3A28;
+    --mau-canh-bao: #F0BD4A;
+    --mau-canh-bao-nhat: #3D3010;
+    --mau-loi: #FF8A80;
+    --mau-loi-nhat: #44201F;
+    --bong: 0 2px 4px rgb(0 0 0 / 28%), 0 8px 20px rgb(0 0 0 / 24%);
+    --bong-noi: 0 10px 24px rgb(0 0 0 / 34%);
+    color-scheme: dark;
+  }
+}
+
+/* Lặp token tối để theme thủ công hoạt động cả khi hệ điều hành đang Sáng. */
+:root[data-theme="dark"] {
   --mau-nen: #14171C;
   --mau-the: #1E232B;
   --mau-vien: #2E3540;
@@ -95,7 +121,6 @@ body:has(#che-do-toi:checked) {
   --mau-loi-nhat: #44201F;
   --bong: 0 2px 4px rgb(0 0 0 / 28%), 0 8px 20px rgb(0 0 0 / 24%);
   --bong-noi: 0 10px 24px rgb(0 0 0 / 34%);
-
   color-scheme: dark;
 }
 
