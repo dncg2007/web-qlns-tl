@@ -77,6 +77,55 @@ function demNhanVienTheoPhong(dsNV, dsPB) {
   }));
 }
 
+/** Kiểm tra phòng ban và trưởng phòng theo dữ liệu nhân viên. */
+function kiemTraPhongBan(duLieu, dsPB, dsNV) {
+  const loi = [];
+  const ten = typeof duLieu?.TenPB === "string" ? duLieu.TenPB.trim() : "";
+  if (!ten) loi.push({ truong: "TenPB", thongBao: "Tên phòng ban không được để trống." });
+  if ((Array.isArray(dsPB) ? dsPB : []).some((pb) => pb.MaPB !== duLieu.MaPB && boDauTiengViet(pb.TenPB) === boDauTiengViet(ten))) loi.push({ truong: "TenPB", thongBao: "Tên phòng ban đã tồn tại." });
+  if (duLieu.MaTruongPhong && !(Array.isArray(dsNV) ? dsNV : []).some((nv) => nv.MaNV === duLieu.MaTruongPhong && nv.MaPB === duLieu.MaPB)) loi.push({ truong: "MaTruongPhong", thongBao: "Trưởng phòng phải thuộc phòng ban." });
+  return loi;
+}
+
+/** Sinh mã phòng ban kế tiếp theo định dạng PB##. */
+function sinhMaPhongBan(dsPB) { const max = (Array.isArray(dsPB) ? dsPB : []).reduce((m, pb) => Math.max(m, Number(String(pb.MaPB || "").replace(/^PB/, "")) || 0), 0); return `PB${String(max + 1).padStart(2, "0")}`; }
+
+/** Thêm phòng ban mà không sửa mảng đầu vào. */
+function themPhongBan(dsPB, phongBan) { return [...(Array.isArray(dsPB) ? dsPB : []), { ...phongBan }]; }
+
+/** Sửa phòng ban theo mã và trả mảng mới. */
+function suaPhongBan(dsPB, maPB, thayDoi) { return (Array.isArray(dsPB) ? dsPB : []).map((pb) => pb.MaPB === maPB ? { ...pb, ...thayDoi, MaPB: maPB } : { ...pb }); }
+
+/** Chặn xóa phòng ban còn nhân viên đang tham chiếu. */
+function xoaPhongBan(dsPB, dsNV, maPB) { const so = (Array.isArray(dsNV) ? dsNV : []).filter((nv) => nv.MaPB === maPB).length; return so ? { ketQua: [...(dsPB || [])], loi: `Phòng còn ${so} nhân viên` } : { ketQua: (dsPB || []).filter((pb) => pb.MaPB !== maPB), loi: null }; }
+
+/** Kiểm tra tên chức vụ không rỗng và không trùng không dấu. */
+function kiemTraChucVu(duLieu, dsCV) { const ten = typeof duLieu?.TenChucVu === "string" ? duLieu.TenChucVu.trim() : ""; const loi = []; if (!ten) loi.push({ truong: "TenChucVu", thongBao: "Tên chức vụ không được để trống." }); if ((dsCV || []).some((cv) => cv.MaChucVu !== duLieu.MaChucVu && boDauTiengViet(cv.TenChucVu) === boDauTiengViet(ten))) loi.push({ truong: "TenChucVu", thongBao: "Tên chức vụ đã tồn tại." }); return loi; }
+
+/** Sinh mã chức vụ kế tiếp theo định dạng CV##. */
+function sinhMaChucVu(dsCV) { const max = (dsCV || []).reduce((m, cv) => Math.max(m, Number(String(cv.MaChucVu || "").replace(/^CV/, "")) || 0), 0); return `CV${String(max + 1).padStart(2, "0")}`; }
+
+/** Thêm chức vụ mới. */
+function themChucVu(dsCV, chucVu) { return [...(dsCV || []), { ...chucVu }]; }
+
+/** Sửa chức vụ và cập nhật chức vụ tương ứng trên nhân viên. */
+function suaChucVu(dsCV, dsNV, maCV, thayDoi) { const cu = (dsCV || []).find((cv) => cv.MaChucVu === maCV); return { danhSach: (dsCV || []).map((cv) => cv.MaChucVu === maCV ? { ...cv, ...thayDoi, MaChucVu: maCV } : { ...cv }), nhanVien: (dsNV || []).map((nv) => nv.ChucVu === cu?.TenChucVu ? { ...nv, ChucVu: thayDoi.TenChucVu } : { ...nv }) }; }
+
+/** Chặn xóa chức vụ đang có nhân viên giữ. */
+function xoaChucVu(dsCV, dsNV, maCV) { const cu = (dsCV || []).find((cv) => cv.MaChucVu === maCV); const so = (dsNV || []).filter((nv) => nv.ChucVu === cu?.TenChucVu).length; return so ? { ketQua: [...(dsCV || [])], loi: `Chức vụ còn ${so} nhân viên` } : { ketQua: (dsCV || []).filter((cv) => cv.MaChucVu !== maCV), loi: null }; }
+
+/** Sửa nhân viên theo mã, không cho thay MaNV. */
+function suaNhanVien(dsNV, maNV, thayDoi) { return (dsNV || []).map((nv) => nv.MaNV === maNV ? { ...nv, ...thayDoi, MaNV: maNV } : { ...nv }); }
+
+/** Kết thúc hợp đồng hiện hành tại ngày nghỉ. */
+function choNghiViec(dsHopDong, maNV, ngayNghi) { const ds = dsHopDong || []; const hd = ds.filter((x) => x.MaNV === maNV && !x.DenNgay).sort((a, b) => b.TuNgay.localeCompare(a.TuNgay))[0]; if (!hd || dinhDangNgay(ngayNghi) === "—" || ngayNghi < hd.TuNgay) return { ketQua: [...ds], loi: "Không có hợp đồng hiện hành hoặc ngày nghỉ không hợp lệ." }; return { ketQua: ds.map((x) => x === hd ? { ...x, DenNgay: ngayNghi } : { ...x }), loi: null }; }
+
+/** Đếm nhân viên theo danh mục chức vụ. */
+function demChucVu(dsNV, dsCV) { return (dsCV || []).map((cv) => ({ MaChucVu: cv.MaChucVu, TenChucVu: cv.TenChucVu, SoLuong: (dsNV || []).filter((nv) => nv.ChucVu === cv.TenChucVu).length })); }
+
+/** Cập nhật TrangThai dẫn xuất theo ngày tham chiếu mà không sửa mảng gốc. */
+function capNhatTrangThai(dsNV, dsHopDong, ngayThamChieu) { return (dsNV || []).map((nv) => ({ ...nv, TrangThai: suyRaTrangThai(nv.MaNV, dsHopDong, ngayThamChieu) })); }
+
 /** Sinh mã nhân viên kế tiếp theo độ rộng mã lớn nhất hiện có. */
 /** Chọn theme hợp lệ: ưu tiên giá trị đã lưu, sau đó đến preference hệ điều hành. */
 /* Giữ đồng bộ với chonTheme trong theme.js: cùng whitelist và fallback hệ điều hành. */
@@ -240,4 +289,58 @@ function ngayCuoiThang(thang) {
   const [nam, soThang] = thang.split("-").map(Number);
   const soNgay = [31, (nam % 4 === 0 && nam % 100 !== 0) || nam % 400 === 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][soThang - 1];
   return `${nam}-${String(soThang).padStart(2, "0")}-${soNgay}`;
+}
+
+/** Thống kê cơ cấu nhân sự theo giới tính. */
+function thongKeGioiTinh(dsNV) {
+  const danhSach = Array.isArray(dsNV) ? dsNV : [];
+  const tong = danhSach.length || 1;
+  const ketQua = danhSach.reduce((acc, nv) => {
+    if (nv && nv.GioiTinh === "Nam") acc.nam += 1;
+    else if (nv && nv.GioiTinh === "Nữ") acc.nu += 1;
+    else acc.khac += 1;
+    return acc;
+  }, { nam: 0, nu: 0, khac: 0 });
+  return {
+    ...ketQua,
+    tong: danhSach.length,
+    tyLeNam: Math.round((ketQua.nam / tong) * 100),
+    tyLeNu: Math.round((ketQua.nu / tong) * 100),
+    tyLeKhac: Math.round((ketQua.khac / tong) * 100)
+  };
+}
+
+/** Thống kê cơ cấu nhân sự theo loại nhân viên. */
+function thongKeLoaiNhanVien(dsNV) {
+  const danhSach = Array.isArray(dsNV) ? dsNV : [];
+  const tong = danhSach.length || 1;
+  const chinhThuc = danhSach.filter((nv) => nv && nv.LoaiNV === "ChinhThuc").length;
+  const thoiVu = danhSach.filter((nv) => nv && nv.LoaiNV === "ThoiVu").length;
+  return {
+    chinhThuc,
+    thoiVu,
+    tong: danhSach.length,
+    tyLeChinhThuc: Math.round((chinhThuc / tong) * 100),
+    tyLeThoiVu: Math.round((thoiVu / tong) * 100)
+  };
+}
+
+/** Thống kê phân bổ nhân viên theo bậc lương. */
+function thongKeBacLuong(dsNV, dsLuong, dsMucLuong, ngayThamChieu) {
+  const danhSachNV = Array.isArray(dsNV) ? dsNV : [];
+  const mucLuongList = Array.isArray(dsMucLuong) ? dsMucLuong : [];
+  return mucLuongList.map((muc) => {
+    const soLuong = danhSachNV.filter((nv) => {
+      if (!nv) return false;
+      const tienLuong = layLuongHienHanh(nv.MaNV, dsLuong, dsMucLuong, ngayThamChieu);
+      return tienLuong === Number(muc.SoTien);
+    }).length;
+    return {
+      MaMucLuong: muc.MaMucLuong,
+      TenMucLuong: muc.TenMucLuong,
+      SoTien: muc.SoTien,
+      SoLuong: soLuong,
+      TyLe: danhSachNV.length ? Math.round((soLuong / danhSachNV.length) * 100) : 0
+    };
+  });
 }
