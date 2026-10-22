@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Phòng ban | HRM &amp; Payroll</title>
+    <meta name="description" content="Quản lý danh mục phòng ban, cơ cấu nhân sự và trưởng phòng trong hệ thống HRM &amp; Payroll.">
+    <script src="js/theme.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/data.js" defer></script>
+    <script src="js/kho-du-lieu.js" defer></script>
+    <script src="js/logic.js" defer></script>
+    <script src="js/features.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#noi-dung-chinh">Bỏ qua tới nội dung</a>
+    <svg class="icon-sprite" aria-hidden="true" focusable="false">
+      <symbol id="icon-dashboard" viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6V11h-6v9Zm0-16v5h6V4h-6Z"/></symbol>
+      <symbol id="icon-users" viewBox="0 0 24 24"><path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4ZM8 10a3 3 0 1 0-3-3 3 3 0 0 0 3 3Zm8 3c-3.31 0-6 1.79-6 4v3h12v-3c0-2.21-2.69-4-6-4ZM8 13c-2.76 0-5 1.57-5 3.5V20h5v-2c0-1.18.48-2.25 1.28-3.08A6.4 6.4 0 0 0 8 13Z"/></symbol>
+      <symbol id="icon-wallet" viewBox="0 0 24 24"><path d="M3 6a3 3 0 0 1 3-3h12v3H6a1 1 0 0 0 0 2h15v12H6a3 3 0 0 1-3-3V6Zm14 6v3h4v-3h-4Z"/></symbol>
+      <symbol id="icon-building" viewBox="0 0 24 24"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M9 7h2m-2 4h2m-2 4h2m-2 4h2m5-8h4a2 2 0 0 1 2 2v6h-6m2-4h2"/></symbol>
+      <symbol id="icon-briefcase" viewBox="0 0 24 24"><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M4 7h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Zm0 5 8 3 8-3"/></symbol>
+      <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+      <symbol id="icon-theme" viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M5.64 5.64l1.41 1.41m9.9 9.9 1.41 1.41M3 12h2m14 0h2M5.64 18.36l1.41-1.41m9.9-9.9 1.41-1.41M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"/></symbol>
+    </svg>
+
+    <!-- Khối đầu trang: nhận diện hệ thống và thao tác dùng chung. -->
+    <header>
+      <button class="nut nut-nho nut-vien nut-thu-gon-sidebar" id="nut-thu-gon-sidebar" type="button" aria-label="Thu gọn hoặc mở rộng thanh điều hướng" aria-expanded="true">
+        <svg class="icon" aria-hidden="true"><use href="#icon-menu"></use></svg>
+        <span class="sr-only">Thu gọn thanh điều hướng</span>
+      </button>
+      <form role="search" action="#" method="get">
+        <label class="sr-only" for="global-search">Tìm kiếm nhanh</label>
+        <input id="global-search" name="q" type="search" placeholder="Tìm nhân viên hoặc phòng ban">
+        <button class="nut nut-nho" type="submit">Tìm</button>
+      </form>
+      <button class="nut nut-nho" id="nut-doi-giao-dien" type="button" aria-pressed="false" aria-label="Chuyển sang giao diện tối">Giao diện tối</button>
+    </header>
+
+    <!-- Điều hướng chính -->
+    <nav aria-label="Điều hướng chính">
+      <span class="nav-brand"><span class="logo-mark" aria-hidden="true">H</span><span>HRM &amp; Payroll</span></span>
+      <ul>
+        <li><a href="index.html" title="Tổng quan"><svg class="icon" aria-hidden="true"><use href="#icon-dashboard"></use></svg><span class="nav-text">Tổng quan</span></a></li>
+        <li><a href="nhan-vien.html" title="Nhân viên"><svg class="icon" aria-hidden="true"><use href="#icon-users"></use></svg><span class="nav-text">Nhân viên</span></a></li>
+        <li><a href="bang-luong.html" title="Bảng lương"><svg class="icon" aria-hidden="true"><use href="#icon-wallet"></use></svg><span class="nav-text">Bảng lương</span></a></li>
+        <li><a href="phong-ban.html" aria-current="page" title="Phòng ban"><svg class="icon" aria-hidden="true"><use href="#icon-building"></use></svg><span class="nav-text">Phòng ban</span></a></li>
+        <li><a href="chuc-vu.html" title="Chức vụ"><svg class="icon" aria-hidden="true"><use href="#icon-briefcase"></use></svg><span class="nav-text">Chức vụ</span></a></li>
+      </ul>
+    </nav>
+
+    <!-- Nội dung chính -->
+    <main id="noi-dung-chinh" class="trang-phong-ban">
+      <h1 class="tieu-de animate__animated animate__fadeInDown">Quản lý phòng ban</h1>
+
+      <!-- Thanh công cụ & Thống kê -->
+      <section class="the" aria-labelledby="phong-ban-toolbar-heading">
+        <h2 id="phong-ban-toolbar-heading" class="sr-only">Công cụ quản lý phòng ban</h2>
+        <div class="thanh-cong-cu">
+          <div>
+            <button class="nut" id="nut-them-phong-ban" type="button">Thêm phòng ban mới</button>
+          </div>
+          <p id="phong-ban-thong-bao" aria-live="polite">Đang tải dữ liệu phòng ban...</p>
+        </div>
+        <dl class="thong-ke">
+          <div>
+            <dt>Tổng phòng ban</dt>
+            <dd id="thong-ke-tong-pb">0</dd>
+          </div>
+          <div>
+            <dt>Đã phân phòng</dt>
+            <dd id="thong-ke-tong-nv-pb">0</dd>
+          </div>
+          <div>
+            <dt>Phòng đông nhất</dt>
+            <dd id="thong-ke-pb-lon-nhat">—</dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- Danh sách phòng ban dạng thẻ -->
+      <section class="the" aria-labelledby="phong-ban-heading">
+        <h2 id="phong-ban-heading">Danh mục phòng ban</h2>
+        <div id="danh-sach-phong-ban" class="luoi-quan-ly"></div>
+      </section>
+    </main>
+
+    <!-- Dialog thêm hoặc sửa phòng ban -->
+    <dialog id="dialog-phong-ban" aria-labelledby="tieu-de-dialog-pb">
+      <form id="form-phong-ban" method="dialog">
+        <h2 id="tieu-de-dialog-pb">Thêm phòng ban mới</h2>
+        <div>
+          <label for="pb-ma">Mã phòng ban</label>
+          <input id="pb-ma" name="MaPB" type="text" readonly>
+        </div>
+        <div>
+          <label for="pb-ten">Tên phòng ban</label>
+          <input id="pb-ten" name="TenPB" type="text" required placeholder="Nhập tên phòng ban">
+        </div>
+        <div>
+          <label for="pb-mo-ta">Mô tả</label>
+          <textarea id="pb-mo-ta" name="MoTa" rows="3" placeholder="Mô tả chức năng nhiệm vụ"></textarea>
+        </div>
+        <div>
+          <label for="pb-truong-phong">Trưởng phòng</label>
+          <select id="pb-truong-phong" name="MaTruongPhong">
+            <option value="">Chưa phân công</option>
+          </select>
+        </div>
+        <p class="thong-bao-loi" id="loi-dialog-pb" aria-live="polite"></p>
+        <div class="dialog-actions">
+          <button class="nut" id="nut-luu-pb" type="submit">Lưu phòng ban</button>
+          <button class="nut nut-vien" id="nut-dong-dialog-pb" type="button">Hủy</button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- Dialog xác nhận xóa phòng ban -->
+    <dialog id="dialog-xoa-phong-ban" aria-labelledby="tieu-de-dialog-xoa-pb">
+      <form id="form-xoa-phong-ban" method="dialog">
+        <h2 id="tieu-de-dialog-xoa-pb">Xác nhận xóa phòng ban</h2>
+        <p id="mo-ta-xoa-pb">Bạn có chắc chắn muốn xóa phòng ban này?</p>
+        <p class="thong-bao-loi" id="loi-dialog-xoa-pb" aria-live="polite"></p>
+        <div class="dialog-actions">
+          <button class="nut nut-nguy-hiem" id="nut-xac-nhan-xoa-pb" type="submit">Xóa</button>
+          <button class="nut nut-vien" id="nut-dong-dialog-xoa-pb" type="button">Hủy</button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- Chân trang -->
+    <footer>
+      <p>© 2026 HRM &amp; Payroll — Hệ thống Quản lý Nhân sự &amp; Tiền lương.</p>
+      <address>Email hỗ trợ: <a href="mailto:hrm@example.com">hrm@example.com</a></address>
+    </footer>
+  </body>
+</html>

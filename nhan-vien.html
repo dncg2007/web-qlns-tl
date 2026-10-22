@@ -8,16 +8,31 @@
     <script src="js/theme.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/data.js" defer></script>
+    <script src="js/kho-du-lieu.js" defer></script>
+    <script src="js/logic.js" defer></script>
+    <script src="js/features.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#noi-dung-chinh">Bỏ qua tới nội dung</a>
-    <svg class="icon-sprite" aria-hidden="true" focusable="false"><symbol id="icon-dashboard" viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6V11h-6v9Zm0-16v5h6V4h-6Z"/></symbol><symbol id="icon-users" viewBox="0 0 24 24"><path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4ZM8 10a3 3 0 1 0-3-3 3 3 0 0 0 3 3Zm8 3c-3.31 0-6 1.79-6 4v3h12v-3c0-2.21-2.69-4-6-4ZM8 13c-2.76 0-5 1.57-5 3.5V20h5v-2c0-1.18.48-2.25 1.28-3.08A6.4 6.4 0 0 0 8 13Z"/></symbol><symbol id="icon-wallet" viewBox="0 0 24 24"><path d="M3 6a3 3 0 0 1 3-3h12v3H6a1 1 0 0 0 0 2h15v12H6a3 3 0 0 1-3-3V6Zm14 6v3h4v-3h-4Z"/></symbol><symbol id="icon-theme" viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M5.64 5.64l1.41 1.41m9.9 9.9 1.41 1.41M3 12h2m14 0h2M5.64 18.36l1.41-1.41m9.9-9.9 1.41-1.41M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"/></symbol></svg>
+    <svg class="icon-sprite" aria-hidden="true" focusable="false">
+      <symbol id="icon-dashboard" viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6V11h-6v9Zm0-16v5h6V4h-6Z"/></symbol>
+      <symbol id="icon-users" viewBox="0 0 24 24"><path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4ZM8 10a3 3 0 1 0-3-3 3 3 0 0 0 3 3Zm8 3c-3.31 0-6 1.79-6 4v3h12v-3c0-2.21-2.69-4-6-4ZM8 13c-2.76 0-5 1.57-5 3.5V20h5v-2c0-1.18.48-2.25 1.28-3.08A6.4 6.4 0 0 0 8 13Z"/></symbol>
+      <symbol id="icon-wallet" viewBox="0 0 24 24"><path d="M3 6a3 3 0 0 1 3-3h12v3H6a1 1 0 0 0 0 2h15v12H6a3 3 0 0 1-3-3V6Zm14 6v3h4v-3h-4Z"/></symbol>
+      <symbol id="icon-building" viewBox="0 0 24 24"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M9 7h2m-2 4h2m-2 4h2m-2 4h2m5-8h4a2 2 0 0 1 2 2v6h-6m2-4h2"/></symbol>
+      <symbol id="icon-briefcase" viewBox="0 0 24 24"><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M4 7h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Zm0 5 8 3 8-3"/></symbol>
+      <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+      <symbol id="icon-theme" viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M5.64 5.64l1.41 1.41m9.9 9.9 1.41 1.41M3 12h2m14 0h2M5.64 18.36l1.41-1.41m9.9-9.9 1.41-1.41M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"/></symbol>
+    </svg>
     <!-- Khối đầu trang: nhận diện hệ thống và thao tác dùng chung. -->
     <header>
-      <a class="logo" href="index.html"><span class="logo-mark" aria-hidden="true">H</span><span>HRM &amp; Payroll</span></a>
+      <button class="nut nut-nho nut-vien nut-thu-gon-sidebar" id="nut-thu-gon-sidebar" type="button" aria-label="Thu gọn hoặc mở rộng thanh điều hướng" aria-expanded="true">
+        <svg class="icon" aria-hidden="true"><use href="#icon-menu"></use></svg>
+        <span class="sr-only">Thu gọn thanh điều hướng</span>
+      </button>
       <!-- Form tìm kiếm dùng chung cho các màn hình; hành vi sẽ bổ sung ở giai đoạn sau. -->
       <form role="search" action="#" method="get">
-        <label for="global-search">Tìm kiếm nhanh</label>
+        <label class="sr-only" for="global-search">Tìm kiếm nhanh</label>
         <input id="global-search" name="q" type="search" placeholder="Tìm nhân viên hoặc phòng ban">
         <button class="nut nut-nho" type="submit">Tìm</button>
       </form>
@@ -29,9 +44,11 @@
     <nav aria-label="Điều hướng chính">
       <span class="nav-brand"><span class="logo-mark" aria-hidden="true">H</span><span>HRM &amp; Payroll</span></span>
       <ul>
-        <li><a href="index.html"><svg class="icon" aria-hidden="true"><use href="#icon-dashboard"></use></svg>Tổng quan</a></li>
-        <li><a href="nhan-vien.html" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#icon-users"></use></svg>Nhân viên</a></li>
-        <li><a href="bang-luong.html"><svg class="icon" aria-hidden="true"><use href="#icon-wallet"></use></svg>Bảng lương</a></li>
+        <li><a href="index.html" title="Tổng quan"><svg class="icon" aria-hidden="true"><use href="#icon-dashboard"></use></svg><span class="nav-text">Tổng quan</span></a></li>
+        <li><a href="nhan-vien.html" aria-current="page" title="Nhân viên"><svg class="icon" aria-hidden="true"><use href="#icon-users"></use></svg><span class="nav-text">Nhân viên</span></a></li>
+        <li><a href="bang-luong.html" title="Bảng lương"><svg class="icon" aria-hidden="true"><use href="#icon-wallet"></use></svg><span class="nav-text">Bảng lương</span></a></li>
+        <li><a href="phong-ban.html" title="Phòng ban"><svg class="icon" aria-hidden="true"><use href="#icon-building"></use></svg><span class="nav-text">Phòng ban</span></a></li>
+        <li><a href="chuc-vu.html" title="Chức vụ"><svg class="icon" aria-hidden="true"><use href="#icon-briefcase"></use></svg><span class="nav-text">Chức vụ</span></a></li>
       </ul>
     </nav>
 
@@ -65,6 +82,7 @@
           <div class="hang-nut-loc">
             <button class="nut" type="submit">Lọc danh sách</button>
             <button class="nut nut-vien" type="reset">Xóa bộ lọc</button>
+            <button class="nut nut-vien" id="nut-khoi-phuc-mau" type="button">Khôi phục dữ liệu mẫu</button>
           </div>
         </form>
         <!-- ===== Thống kê: tổng hợp số lượng nhân viên theo trạng thái. ===== -->
@@ -80,14 +98,21 @@
 
       <!-- ===== Danh sách nhân viên: bảng được render từ Data Contract. ===== -->
       <section class="khu-danh-sach" id="employee-list" aria-labelledby="employee-list-heading">
-        <h2 id="employee-list-heading">Danh sách nhân viên</h2>
-        <p id="dong-ket-qua" aria-live="polite">Tìm thấy 0 / 0 nhân viên</p>
+        <div class="thanh-cong-cu">
+          <div>
+            <h2 id="employee-list-heading">Danh sách nhân viên</h2>
+            <p id="dong-ket-qua" aria-live="polite">Tìm thấy 0 / 0 nhân viên</p>
+          </div>
+          <div>
+            <button class="nut" id="nut-them-nhan-vien" type="button">Thêm nhân viên mới</button>
+          </div>
+        </div>
         <div class="bang-cuon">
           <table id="bang-nhan-vien">
             <caption>Danh sách nhân viên từ dữ liệu mẫu</caption>
             <thead>
               <tr>
-                <th scope="col">Ảnh đại diện</th>
+                <th scope="col"><span class="sr-only">Ảnh đại diện</span><span aria-hidden="true">Ảnh</span></th>
                 <th scope="col">Mã NV</th>
                 <th scope="col">Họ và tên</th>
                 <th scope="col">Giới tính</th>
@@ -102,10 +127,53 @@
           </table>
         </div>
       </section>
+    </main>
 
-      <!-- Biểu mẫu hồ sơ: chia thành bốn fieldset để nhóm thông tin theo trách nhiệm dữ liệu. -->
-      <section class="khu-bieu-mau the" id="employee-form" aria-labelledby="employee-form-heading">
-        <h2 id="employee-form-heading">Thêm hoặc sửa hồ sơ nhân viên</h2>
+    <!-- Dialog xem chi tiết hồ sơ nhân viên -->
+    <dialog id="dialog-xem-ho-so" aria-labelledby="tieu-de-dialog-xem-ho-so">
+      <div class="ho-so-modal-body">
+        <h2 id="tieu-de-dialog-xem-ho-so">Chi tiết hồ sơ nhân viên</h2>
+        <div id="noi-dung-ho-so-modal">
+          <h3 id="ho-so-ho-ten">Chưa chọn nhân viên</h3>
+          <dl>
+            <dt>Mã nhân viên</dt>
+            <dd id="ho-so-ma-nv">—</dd>
+            <dt>Phòng ban</dt>
+            <dd id="ho-so-phong-ban">—</dd>
+            <dt>Chức vụ</dt>
+            <dd id="ho-so-chuc-vu">—</dd>
+            <dt>Giới tính</dt>
+            <dd id="ho-so-gioi-tinh">—</dd>
+            <dt>Ngày sinh</dt>
+            <dd id="ho-so-ngay-sinh">—</dd>
+            <dt>Điện thoại</dt>
+            <dd id="ho-so-dien-thoai">—</dd>
+            <dt>Email</dt>
+            <dd id="ho-so-email">—</dd>
+            <dt>CMND/CCCD</dt>
+            <dd id="ho-so-cmnd">—</dd>
+            <dt>Ngày cấp</dt>
+            <dd id="ho-so-ngay-cap">—</dd>
+            <dt>Nơi cấp</dt>
+            <dd id="ho-so-noi-cap">—</dd>
+            <dt>Quê quán</dt>
+            <dd id="ho-so-que-quan">—</dd>
+            <dt>Mức lương</dt>
+            <dd id="ho-so-muc-luong">—</dd>
+            <dt>Hợp đồng</dt>
+            <dd id="ho-so-hop-dong">—</dd>
+          </dl>
+        </div>
+        <div class="dialog-actions">
+          <button class="nut nut-vien" id="nut-dong-xem-ho-so" type="button">Đóng</button>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Dialog thêm hồ sơ nhân viên mới -->
+    <dialog id="dialog-them-nhan-vien" class="hop-thoai-lon" aria-labelledby="employee-form-heading">
+      <div id="employee-form">
+        <h2 id="employee-form-heading">Thêm nhân viên mới</h2>
         <form action="#employee-list" method="post" novalidate>
           <fieldset>
             <legend>Thông tin định danh</legend>
@@ -119,9 +187,9 @@
             <input id="birth-date" name="NgaySinh" type="date" autocomplete="bday" aria-describedby="loi-ngay-sinh" required>
             <small class="thong-bao-loi" id="loi-ngay-sinh" role="alert" aria-live="polite"></small>
             <p>Giới tính</p>
-            <label for="gender-male"><input id="gender-male" name="GioiTinh" type="radio" value="Nam" required> Nam</label>
-            <label for="gender-female"><input id="gender-female" name="GioiTinh" type="radio" value="Nữ"> Nữ</label>
-            <label for="gender-other"><input id="gender-other" name="GioiTinh" type="radio" value="Khác"> Khác</label>
+            <label><input id="gender-male" name="GioiTinh" type="radio" value="Nam" required> Nam</label>
+            <label><input id="gender-female" name="GioiTinh" type="radio" value="Nữ"> Nữ</label>
+            <label><input id="gender-other" name="GioiTinh" type="radio" value="Khác"> Khác</label>
             <small class="thong-bao-loi" id="loi-gioi-tinh" role="alert" aria-live="polite"></small>
           </fieldset>
 
@@ -158,57 +226,113 @@
             <small class="thong-bao-loi" id="loi-chuc-vu" role="alert" aria-live="polite"></small>
           </fieldset>
 
-          <button class="nut" type="submit">Lưu</button>
           <p id="thong-bao-form" aria-live="polite"></p>
-          <button class="nut nut-vien" type="reset">Nhập lại</button>
+          <div class="dialog-actions">
+            <button class="nut" id="nut-luu-them-nv" type="submit">Lưu hồ sơ</button>
+            <button class="nut nut-vien" id="nut-dong-them-nv" type="button">Hủy</button>
+            <button class="nut nut-vien" type="reset">Nhập lại</button>
+          </div>
         </form>
-      </section>
+      </div>
+    </dialog>
 
-      <!-- Hồ sơ nhanh: cung cấp bản xem trước của một nhân viên được chọn. -->
-      <aside class="ho-so-nhanh" aria-labelledby="quick-profile-heading">
-        <h2 id="quick-profile-heading">Hồ sơ nhanh</h2>
-        <article class="the animate__animated animate__fadeInRight">
-          <figure>
-            <img src="assets/images/avatar-placeholder.svg" alt="Ảnh đại diện mẫu của Nguyễn Minh Anh" width="160" height="160">
-            <figcaption>Ảnh hồ sơ tạm thời</figcaption>
-          </figure>
-          <p id="huong-dan-ho-so">Chọn một nhân viên để xem hồ sơ.</p>
-          <h2 id="ho-so-ho-ten">Chưa chọn nhân viên</h2>
-          <dl>
-            <dt>Mã nhân viên</dt>
-            <dd id="ho-so-ma-nv">—</dd>
-            <dt>Phòng ban</dt>
-            <dd id="ho-so-phong-ban">—</dd>
-            <dt>CMND/CCCD</dt>
-            <dd id="ho-so-cmnd">—</dd>
-            <dt>Ngày cấp</dt>
-            <dd id="ho-so-ngay-cap">—</dd>
-            <dt>Nơi cấp</dt>
-            <dd id="ho-so-noi-cap">—</dd>
-            <dt>Quê quán</dt>
-            <dd id="ho-so-que-quan">—</dd>
-            <dt>Mức lương</dt>
-            <dd id="ho-so-muc-luong">—</dd>
-            <dt>Hợp đồng</dt>
-            <dd id="ho-so-hop-dong">—</dd>
-          </dl>
-          <details>
-            <summary>Xem thêm thông tin</summary>
-            <p>Ngày vào làm: 15/08/2022. Chức vụ: Lập trình viên.</p>
-          </details>
-        </article>
-      </aside>
-    </main>
+    <!-- Dialog sửa hồ sơ nhân viên -->
+    <dialog id="dialog-sua-nhan-vien" aria-labelledby="tieu-de-dialog-sua">
+      <form id="form-sua-nhan-vien" method="dialog">
+        <h2 id="tieu-de-dialog-sua">Sửa hồ sơ nhân viên</h2>
+        <div>
+          <label for="edit-employee-id">Mã nhân viên</label>
+          <input id="edit-employee-id" name="MaNV" type="text" readonly>
+        </div>
+        <div>
+          <label for="edit-full-name">Họ và tên</label>
+          <input id="edit-full-name" name="HoTen" type="text" required>
+        </div>
+        <div>
+          <label for="edit-birth-date">Ngày sinh</label>
+          <input id="edit-birth-date" name="NgaySinh" type="date" required>
+        </div>
+        <div>
+          <label for="edit-gender">Giới tính</label>
+          <select id="edit-gender" name="GioiTinh" required>
+            <option value="Nam">Nam</option>
+            <option value="Nữ">Nữ</option>
+            <option value="Khác">Khác</option>
+          </select>
+        </div>
+        <div>
+          <label for="edit-cmnd">CMND/CCCD</label>
+          <input id="edit-cmnd" name="CMND" type="text" required>
+        </div>
+        <div>
+          <label for="edit-issue-date">Ngày cấp</label>
+          <input id="edit-issue-date" name="NgayCap" type="date" required>
+        </div>
+        <div>
+          <label for="edit-issue-place">Nơi cấp</label>
+          <input id="edit-issue-place" name="NoiCap" type="text" required>
+        </div>
+        <div>
+          <label for="edit-hometown">Quê quán</label>
+          <input id="edit-hometown" name="QueQuan" type="text" required>
+        </div>
+        <div>
+          <label for="edit-phone">Số điện thoại</label>
+          <input id="edit-phone" name="DienThoai" type="tel" required>
+        </div>
+        <div>
+          <label for="edit-email">Email</label>
+          <input id="edit-email" name="Email" type="email">
+        </div>
+        <div>
+          <label for="edit-department">Phòng ban</label>
+          <select id="edit-department" name="MaPB" required></select>
+        </div>
+        <div>
+          <label for="edit-position">Chức vụ</label>
+          <input id="edit-position" name="ChucVu" type="text" required>
+        </div>
+        <p class="thong-bao-loi" id="loi-dialog-sua" aria-live="polite"></p>
+        <div class="dialog-actions">
+          <button class="nut" id="nut-luu-sua-nv" type="submit">Lưu thay đổi</button>
+          <button class="nut nut-vien" id="nut-dong-sua-nv" type="button">Hủy</button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- Dialog xác nhận cho nghỉ việc -->
+    <dialog id="dialog-cho-nghi-viec" aria-labelledby="tieu-de-dialog-nghi">
+      <form id="form-cho-nghi-viec" method="dialog">
+        <h2 id="tieu-de-dialog-nghi">Xác nhận cho nghỉ việc</h2>
+        <p id="mo-ta-cho-nghi-viec">Bạn có chắc chắn muốn cho nhân viên này thôi việc?</p>
+        <div>
+          <label for="ngay-nghi-viec">Ngày nghỉ việc</label>
+          <input id="ngay-nghi-viec" name="ngayNghi" type="date" required>
+        </div>
+        <p class="thong-bao-loi" id="loi-dialog-nghi" aria-live="polite"></p>
+        <div class="dialog-actions">
+          <button class="nut nut-nguy-hiem" id="nut-xac-nhan-nghi" type="submit">Xác nhận cho nghỉ</button>
+          <button class="nut nut-vien" id="nut-dong-dialog-nghi" type="button">Hủy</button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- Dialog xác nhận khôi phục dữ liệu mẫu -->
+    <dialog id="dialog-xac-nhan-khoi-phuc" aria-labelledby="tieu-de-dialog-khoi-phuc">
+      <form id="form-khoi-phuc-mau" method="dialog">
+        <h2 id="tieu-de-dialog-khoi-phuc">Khôi phục dữ liệu mẫu</h2>
+        <p>Thao tác này sẽ xóa toàn bộ các thay đổi hiện tại và đặt lại dữ liệu về trạng thái ban đầu. Bạn có muốn tiếp tục?</p>
+        <div class="dialog-actions">
+          <button class="nut nut-nguy-hiem" id="nut-dong-y-khoi-phuc" type="submit">Khôi phục</button>
+          <button class="nut nut-vien" id="nut-huy-khoi-phuc" type="button">Hủy</button>
+        </div>
+      </form>
+    </dialog>
 
     <!-- Chân trang: thông tin liên hệ và bản quyền dự án. -->
     <footer>
-      <p>© 2026 HRM &amp; Payroll — Giai đoạn 1: nền tảng và kiến trúc.</p>
+      <p>© 2026 HRM &amp; Payroll — Hệ thống Quản lý Nhân sự &amp; Tiền lương.</p>
       <address>Email hỗ trợ: <a href="mailto:hrm@example.com">hrm@example.com</a></address>
     </footer>
-
-    <!-- Script Sprint 1: nạp Data Contract, hàm thuần và lớp kết nối giao diện. -->
-    <script src="js/data.js" defer></script>
-    <script src="js/logic.js" defer></script>
-    <script src="js/features.js" defer></script>
   </body>
 </html>

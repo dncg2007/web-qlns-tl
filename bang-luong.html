@@ -9,18 +9,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/data.js" defer></script>
+    <script src="js/kho-du-lieu.js" defer></script>
     <script src="js/logic.js" defer></script>
     <script src="js/features.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#noi-dung-chinh">Bỏ qua tới nội dung</a>
-    <svg class="icon-sprite" aria-hidden="true" focusable="false"><symbol id="icon-dashboard" viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6V11h-6v9Zm0-16v5h6V4h-6Z"/></symbol><symbol id="icon-users" viewBox="0 0 24 24"><path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4ZM8 10a3 3 0 1 0-3-3 3 3 0 0 0 3 3Zm8 3c-3.31 0-6 1.79-6 4v3h12v-3c0-2.21-2.69-4-6-4ZM8 13c-2.76 0-5 1.57-5 3.5V20h5v-2c0-1.18.48-2.25 1.28-3.08A6.4 6.4 0 0 0 8 13Z"/></symbol><symbol id="icon-wallet" viewBox="0 0 24 24"><path d="M3 6a3 3 0 0 1 3-3h12v3H6a1 1 0 0 0 0 2h15v12H6a3 3 0 0 1-3-3V6Zm14 6v3h4v-3h-4Z"/></symbol><symbol id="icon-theme" viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M5.64 5.64l1.41 1.41m9.9 9.9 1.41 1.41M3 12h2m14 0h2M5.64 18.36l1.41-1.41m9.9-9.9 1.41-1.41M12 7a5 5 0 1 0 0 10 5 5 0 0 0-5-5Z"/></symbol></svg>
+    <svg class="icon-sprite" aria-hidden="true" focusable="false">
+      <symbol id="icon-dashboard" viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6V11h-6v9Zm0-16v5h6V4h-6Z"/></symbol>
+      <symbol id="icon-users" viewBox="0 0 24 24"><path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4ZM8 10a3 3 0 1 0-3-3 3 3 0 0 0 3 3Zm8 3c-3.31 0-6 1.79-6 4v3h12v-3c0-2.21-2.69-4-6-4ZM8 13c-2.76 0-5 1.57-5 3.5V20h5v-2c0-1.18.48-2.25 1.28-3.08A6.4 6.4 0 0 0 8 13Z"/></symbol>
+      <symbol id="icon-wallet" viewBox="0 0 24 24"><path d="M3 6a3 3 0 0 1 3-3h12v3H6a1 1 0 0 0 0 2h15v12H6a3 3 0 0 1-3-3V6Zm14 6v3h4v-3h-4Z"/></symbol>
+      <symbol id="icon-building" viewBox="0 0 24 24"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M9 7h2m-2 4h2m-2 4h2m-2 4h2m5-8h4a2 2 0 0 1 2 2v6h-6m2-4h2"/></symbol>
+      <symbol id="icon-briefcase" viewBox="0 0 24 24"><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M4 7h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Zm0 5 8 3 8-3"/></symbol>
+      <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+      <symbol id="icon-theme" viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M5.64 5.64l1.41 1.41m9.9 9.9 1.41 1.41M3 12h2m14 0h2M5.64 18.36l1.41-1.41m9.9-9.9 1.41-1.41M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"/></symbol>
+    </svg>
     <!-- Khối đầu trang: nhận diện hệ thống và thao tác dùng chung. -->
     <header>
-      <a class="logo" href="index.html"><span class="logo-mark" aria-hidden="true">H</span><span>HRM &amp; Payroll</span></a>
+      <button class="nut nut-nho nut-vien nut-thu-gon-sidebar" id="nut-thu-gon-sidebar" type="button" aria-label="Thu gọn hoặc mở rộng thanh điều hướng" aria-expanded="true">
+        <svg class="icon" aria-hidden="true"><use href="#icon-menu"></use></svg>
+        <span class="sr-only">Thu gọn thanh điều hướng</span>
+      </button>
       <!-- Form tìm kiếm dùng chung cho các màn hình; hành vi sẽ bổ sung ở giai đoạn sau. -->
       <form role="search" action="#" method="get">
-        <label for="global-search">Tìm kiếm nhanh</label>
+        <label class="sr-only" for="global-search">Tìm kiếm nhanh</label>
         <input id="global-search" name="q" type="search" placeholder="Tìm nhân viên hoặc phòng ban">
         <button class="nut nut-nho" type="submit">Tìm</button>
       </form>
@@ -32,9 +44,11 @@
     <nav aria-label="Điều hướng chính">
       <span class="nav-brand"><span class="logo-mark" aria-hidden="true">H</span><span>HRM &amp; Payroll</span></span>
       <ul>
-        <li><a href="index.html"><svg class="icon" aria-hidden="true"><use href="#icon-dashboard"></use></svg>Tổng quan</a></li>
-        <li><a href="nhan-vien.html"><svg class="icon" aria-hidden="true"><use href="#icon-users"></use></svg>Nhân viên</a></li>
-        <li><a href="bang-luong.html" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#icon-wallet"></use></svg>Bảng lương</a></li>
+        <li><a href="index.html" title="Tổng quan"><svg class="icon" aria-hidden="true"><use href="#icon-dashboard"></use></svg><span class="nav-text">Tổng quan</span></a></li>
+        <li><a href="nhan-vien.html" title="Nhân viên"><svg class="icon" aria-hidden="true"><use href="#icon-users"></use></svg><span class="nav-text">Nhân viên</span></a></li>
+        <li><a href="bang-luong.html" aria-current="page" title="Bảng lương"><svg class="icon" aria-hidden="true"><use href="#icon-wallet"></use></svg><span class="nav-text">Bảng lương</span></a></li>
+        <li><a href="phong-ban.html" title="Phòng ban"><svg class="icon" aria-hidden="true"><use href="#icon-building"></use></svg><span class="nav-text">Phòng ban</span></a></li>
+        <li><a href="chuc-vu.html" title="Chức vụ"><svg class="icon" aria-hidden="true"><use href="#icon-briefcase"></use></svg><span class="nav-text">Chức vụ</span></a></li>
       </ul>
     </nav>
 
@@ -78,40 +92,7 @@
             </thead>
             <tbody id="than-bang-luong">
               <tr>
-                <td data-cot="Mã NV">NV001</td>
-                <td data-cot="Họ và tên">Nguyễn Minh Anh</td>
-                <td data-cot="Phòng ban">Kỹ thuật</td>
-                <td data-cot="Ngày công"><label for="workdays-nv001">Ngày công NV001</label><input id="workdays-nv001" name="workdays-nv001" type="number" min="0" max="31" value="26"></td>
-                <td class="so-tien" data-cot="Lương cơ bản">24.000.000 VNĐ</td>
-                <td class="so-tien" data-cot="Phụ cấp">2.000.000 VNĐ</td>
-                <td class="so-tien" data-cot="Thực lĩnh">26.000.000 VNĐ</td>
-              </tr>
-              <tr>
-                <td data-cot="Mã NV">NV002</td>
-                <td data-cot="Họ và tên">Trần Quốc Bảo</td>
-                <td data-cot="Phòng ban">Kinh doanh</td>
-                <td data-cot="Ngày công"><label for="workdays-nv002">Ngày công NV002</label><input id="workdays-nv002" name="workdays-nv002" type="number" min="0" max="31" value="25"></td>
-                <td class="so-tien" data-cot="Lương cơ bản">20.000.000 VNĐ</td>
-                <td class="so-tien" data-cot="Phụ cấp">3.000.000 VNĐ</td>
-                <td class="so-tien" data-cot="Thực lĩnh">23.000.000 VNĐ</td>
-              </tr>
-              <tr>
-                <td data-cot="Mã NV">NV003</td>
-                <td data-cot="Họ và tên">Lê Thu Hà</td>
-                <td data-cot="Phòng ban">Nhân sự</td>
-                <td data-cot="Ngày công"><label for="workdays-nv003">Ngày công NV003</label><input id="workdays-nv003" name="workdays-nv003" type="number" min="0" max="31" value="24"></td>
-                <td class="so-tien" data-cot="Lương cơ bản">16.000.000 VNĐ</td>
-                <td class="so-tien" data-cot="Phụ cấp">1.500.000 VNĐ</td>
-                <td class="so-tien" data-cot="Thực lĩnh">17.500.000 VNĐ</td>
-              </tr>
-              <tr>
-                <td data-cot="Mã NV">NV004</td>
-                <td data-cot="Họ và tên">Phạm Gia Huy</td>
-                <td data-cot="Phòng ban">Tài chính</td>
-                <td data-cot="Ngày công"><label for="workdays-nv004">Ngày công NV004</label><input id="workdays-nv004" name="workdays-nv004" type="number" min="0" max="31" value="26"></td>
-                <td class="so-tien" data-cot="Lương cơ bản">18.000.000 VNĐ</td>
-                <td class="so-tien" data-cot="Phụ cấp">1.000.000 VNĐ</td>
-                <td class="so-tien" data-cot="Thực lĩnh">19.000.000 VNĐ</td>
+                <td colspan="7" data-cot="Kết quả" class="khong-co-du-lieu">Đang tính toán bảng lương...</td>
               </tr>
             </tbody>
             <tfoot>
@@ -128,7 +109,7 @@
       <aside class="phieu-luong" aria-labelledby="payslip-heading">
         <h2 id="payslip-heading">Phiếu lương cá nhân</h2>
         <article class="the animate__animated animate__fadeInRight">
-          <h2>Nguyễn Minh Anh — Tháng 06/2025</h2>
+          <h3>Nguyễn Minh Anh — Tháng 06/2025</h3>
           <dl>
             <dt>Ngày công</dt>
             <dd>26 ngày</dd>
@@ -147,7 +128,7 @@
 
     <!-- Chân trang: thông tin liên hệ và bản quyền dự án. -->
     <footer>
-      <p>© 2025 HRM &amp; Payroll — Giai đoạn 1: nền tảng và kiến trúc.</p>
+      <p>© 2026 HRM &amp; Payroll — Hệ thống Quản lý Nhân sự &amp; Tiền lương.</p>
       <address>Email hỗ trợ: <a href="mailto:hrm@example.com">hrm@example.com</a></address>
     </footer>
   </body>
