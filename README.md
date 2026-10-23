@@ -96,7 +96,6 @@ https://dncg2007.github.io/web-qlns-tl/
 | 3 | Nguyễn Võ Gia Huy | 12500xxxx | ____________________ |
 | 4 | Võ Quỳnh Tuấn Anh | 12500xxxx | ____________________ |
 | 5 | Đặng Nguyễn Công Gianh | 12500xxxx | ____________________ |
-| 6 | Đinh Tuấn Hào | 12500xxxx | ____________________ |
 
 ## Quy ước Git
 
